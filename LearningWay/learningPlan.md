@@ -17,10 +17,10 @@
 
 **1.学习 Unity Manual**
 
-unity引擎版本更新比较快，打算把Unity Manual看一遍，一边看，一边实际操作。
+Unity引擎版本更新比较快，打算把Unity Manual看一遍，一边看，一边实际操作。
 学习顺序：
 
-2D->Graphics->Physics->Scripting->Networking->Audio->Animation->Timeline->UI->Navigation->Unity Services->Virtual reality->Platform specific
+2D->Graphics->Physics->Scripting->Networking->Audio->Animation->Timeline->UI->Navigation->Unity Services->Virtual Reality->Platform Specific
 
 注：其中看到 UI 部分的时候，结合着相对应的 UGUI 源码看一遍，然后做总结；看源码的过程中，可以结合着 C# 本质论里面的知识点一块看，然后做相应的总结。
 
@@ -38,11 +38,11 @@ AssetBundle 看原 API 和网上的文章；
 
 **3.游戏设计模式->网络通讯->性能优化**
 
-**设计模式**：目前用的最多的是观察者模式，单例模式，命令模式，状态模式，工厂模式等。现在流行的23中模式，其根本还是要遵守设计模式的六大原则。后期学习的时候，通过学习设计模式，来理解其映射出来的设计原则，结合着《游戏编程模式》一块看
+**设计模式**：目前用的最多的是观察者模式，单例模式，命令模式，状态模式，工厂模式等。现在流行的23种模式，其根本还是要遵守设计模式的六大原则。后期学习的时候，通过学习设计模式，来理解其映射出来的设计原则，结合着《游戏编程模式》一块看
 
-**网络通讯**：Tttp Socket
+**网络通讯**：Http Socket
 
-**性能优化**：内存(资源内存占用，引擎模块自身内存占用，托管堆内存占用)，CPU (引擎模块<渲染模块，UI 模块，加载模块>，自身代码)，GPU。
+**性能优化**：内存(资源内存占用，引擎模块自身内存占用，托管堆内存占用)；CPU (引擎模块<渲染模块，UI 模块，加载模块>，自身代码)；GPU。
 
 ## 第三步 扩展
 
