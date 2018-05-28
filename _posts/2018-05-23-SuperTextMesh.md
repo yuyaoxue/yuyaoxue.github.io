@@ -59,7 +59,7 @@ unityAssetStore 下载链接
 
 新建一个 Unity 项目，然后双击 Super Text Mesh.unitypackage 导入 如图1.1
 
-![图 1.1]({{https://yuyaoxue.github.io/assets/_v_images/_图11_1526006366_19009.png}})
+![图 1.1](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图11_1526006366_19009.png)
                  图 1.1
 
 导入项目之后，接下来说下 SuperTextMesh 的使用流程。
@@ -67,32 +67,32 @@ unityAssetStore 下载链接
 2.添加 Super Text Mesh 到 Scene
 
 1->创建 UI Super Text Mesh 如图 2.1
-![图 2.1]({{https://yuyaoxue.github.io/assets/_v_images/_图21_1526006495_27911.png}})
+![图 2.1](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图21_1526006495_27911.png)
         如图 2.1
 2->创建 3D Super Text Mesh  如图 2.2
-![图 2.2]({{https://yuyaoxue.github.io/assets/_v_images/_图22_1526006523_32629.png}})
+![图 2.2](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图22_1526006523_32629.png)
                              图2.2
 
 我创建了一个 UI SuperTextMesh 创建之后如下图 2.3：
-![图 2.3]({{https://yuyaoxue.github.io/assets/_v_images/_图23_1526006541_5787.png}})
+![图 2.3](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图23_1526006541_5787.png)
         图 2.3
 3.图文混排的实现
 
   在 Text 上输入<q=face>就可以显示出图片来.实现了图文混排，如上图 3.1 所示
-![图 3.1]({{https://yuyaoxue.github.io/assets/_v_images/_图31_1526006562_27080.png}})
+![图 3.1](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图31_1526006562_27080.png)
                             图3.1
 
 Game窗口显示效果：
-![图 3.2]({{https://yuyaoxue.github.io/assets/_v_images/_图32_1526006593_23188.png}})
+![图 3.2](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图32_1526006593_23188.png)
                图 3.2
 
 “face”是 face.asset 文件；SuperTextMesh 里的资源加载方式是通过 Resources.Load()；
 如果需要修改加载资源方式，可以在 SuperTextMeshData 类文件修改。
 创建 .asset 文件->在 Project 里的 Resource 文件夹右击->Create->Super Text Mesh  出来的 Data 数据就是你可以创建的数据文件了，
 如下图 3.3，3.4 所示：
-![图 3.3]({{https://yuyaoxue.github.io/assets/_v_images/_图33_1526006610_27818.png}})
+![图 3.3](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图33_1526006610_27818.png)
                                    图 3.3
-![图 3.4]({{https://yuyaoxue.github.io/assets/_v_images/_图34_1526006630_24233.png}})
+![图 3.4](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图34_1526006630_24233.png)
                                    图 3.4
 
 SuperTextMesh 里面的相关参数的使用官方文档里有详细的解释，我在这里就不赘述了，
@@ -133,9 +133,9 @@ width 会随着 Content Size Fitter 的控制为变化； SuperTextMesh 里的 h
 
 原因：text 的虚拟边框的数据跟所在跟自身以及所有父节点的 Scale 有关系， Super Text Mesh 代码中在计算边框时使用到了 Transform.TransformPoint，而 TransformPoint 是跟自身以及所有父节点的 Scale 值有关系，所以如果需要获取 text 的虚拟边框值，需要注意下这点。
 
-![图 6.1]({{https://yuyaoxue.github.io/assets/_v_images/_图61_1526006647_20181.png}})
+![图 6.1](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图61_1526006647_20181.png)
                      图 6.1   蓝色框时虚拟框
-![图 6.2]({{https://yuyaoxue.github.io/assets/_v_images/_图62_1526006662_12044.png}})
+![图 6.2](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_图62_1526006662_12044.png)
                     图 6.2   计算边框代码位置
 
 最后： 图文混排在 SuperTextMesh 只是冰山一角，有时间实践下其他的功能。
