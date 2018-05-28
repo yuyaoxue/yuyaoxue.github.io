@@ -3,6 +3,7 @@ layout: post
 title:  "学习计划"
 date:   2018-05-23 18:02:01 +0800
 categories: jekyll update
+tags: note
 ---
 # 学习计划
 
