@@ -9,12 +9,13 @@ tags: SuperTextMesh
 
 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
 
-## 第一种：项目里的 TextWithImage (弃用)
+## TextWithImage
 
 Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个...翻倍的创建 Image，消耗性能。
 
-## 第二种是：TextInlineSprite （text中插入图片）（弃用）
+## TextInlineSprite
 
+实现原理：（text中插入图片）
    1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
 
    2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
@@ -28,8 +29,9 @@ Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误
 
 参考链接：[TextInlineSprite](https://blog.csdn.net/qq992817263/article/details/51000744)
 
-## 第三种是 EmojiText （文字和图片独立渲染）（弃用）
+## EmojiText
 
+实现原理：（文字和图片独立渲染）
   这个方案目前想到有两个弊端：
 
   1：Outline、Shadow 使用时，图片也被处理的问题
@@ -38,11 +40,11 @@ Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误
 
 参考链接：[EmojiText (文字和图片独立渲染)](https://blog.uwa4d.com/archives/Sparkle_UGUI.html)
 
- 上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
 
 [UGUI 图文混排解决方案和优化](http://www.cnblogs.com/zsb517/p/6667050.html)
 
-## 第四种：Super Text Mesh （采用）
+## Super Text Mesh
 
 SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
 
