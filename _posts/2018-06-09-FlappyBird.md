@@ -1,5 +1,5 @@
 ---
-layout: Project Progress
+layout: post
 title:  "FlappyBird 制作进度"
 date:   2018-06-09 1.20 +0800
 categories: jekyll update
