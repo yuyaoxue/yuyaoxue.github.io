@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: Project Progress
 title:  "FlappyBird 制作进度"
 date:   2018-06-09 1.20 +0800
 categories: jekyll update
@@ -39,3 +39,27 @@ categories: jekyll update
 4.评分机制
 
 5.游戏模式：简单，复杂，困难
+
+## FlappyBird 制作进度 6月11号
+
+1.简易 UIManager
+
+2搭建（Start, Ready,Gameover）界面；
+
+3.Bird 的碰撞检测;
+
+4.Ground Pipe 循环移动;
+
+5.创建 GameMansger 实现游戏循环；
+
+未完成部分:
+
+1.音效管理器；
+
+2.根据选择的不同难度，Pipe 的动态加载；
+
+3.加分机制（加分，本地数据存储）；
+
+4.随机背景颜色；
+
+5.Bird （随机颜色，上升掉落角度调整）;
