@@ -8,7 +8,7 @@ categories: jekyll update
 
 最近在做一个 2D 游戏，用到了 Sprite 与 Image。UI 界面使用 Image ,游戏场景相关制作使用 Sprite。后来跟小伙伴交流的时候，提到了这一点，说到具体原理，我记得是渲染方式不同，Image 的渲染方式是 Canvas Renderer；Sprite 的渲染方式是 Sprite Renderer，至于具体为什么要使用，一知半解。
 
-## Sprite 与 Image 的异同
+## 异同
 
 1.都是使用一个 Sprite 源进行渲染，而 Image 需要位于 Canvas 下才能显示出来。
 
@@ -31,7 +31,7 @@ Image Inspector
 6.渲染上， Sprite 使用 SpriteRenderer 组件渲染，而 Image 则由 CanvasRenderer 组件渲染，在视觉上没有任何区别。默认的渲染也都是在 Transparent Geometry 队列中。
 而在引擎的处理上，两者则有很大的不同。将 Wireframe 选项打开然后在场景中观察，就可以清楚地发现，Image 会为一个矩形的 Sprite 生成两个三角形拼成的矩形几何体，而 Sprite 则会根据显示内容，裁剪掉元素中的大部分透明区域，最终生成的几何体可能会有比较复杂的顶点结构。
 
-## 在具体项目中如何选择使用
+## 如何选择使用
 
 在 2D 游戏开发中，游戏场景中的元素，应该尽量使用 Sprite；而 Image 应该仅用于 UI 显示，这样调整起来比较简单。还有一个我觉得比较实际的问题，就是 如果目前 2D 游戏升级为成 3D 游戏，相对来说修改的比较少一些。
 
