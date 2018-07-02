@@ -2,8 +2,6 @@
 layout: post
 title:  "调试的重要性"
 date:   2018-05-23 18:02:01 +0800
-categories: Debug
-tags: Debug,note
 ---
 # 调试的重要性
 

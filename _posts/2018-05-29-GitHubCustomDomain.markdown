@@ -2,7 +2,6 @@
 layout: post
 title:  "GitHub 自定义域名"
 date:   2018-05-29 23:40 +0800
-categories: jekyll update
 ---
 GitHub 网站建起来有一周了，GitHub 支持自定义域名，于是就想着买个自己域名作为网站门面
 

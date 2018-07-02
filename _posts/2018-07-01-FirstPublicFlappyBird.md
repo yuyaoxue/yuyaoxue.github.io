@@ -2,7 +2,6 @@
 layout: post
 title:  "First Publish FlapyBird"
 date:   2018-07-01 1.20 +0800
-categories: jekyll update
 ---
 # 前言
 

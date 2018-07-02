@@ -2,8 +2,6 @@
 layout: post
 title:  "图文混排总结"
 date:   2018-05-23 18:02:01 +0800
-categories: jekyll update
-tags: SuperTextMesh
 ---
 # 图文混排总结
 

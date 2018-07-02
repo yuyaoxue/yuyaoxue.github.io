@@ -2,7 +2,6 @@
 layout: post
 title:  "Unity API 之 Canvas 与 Camera"
 date:   2018-06-24 1.20 +0800
-categories: jekyll update
 ---
 # 前言
 

@@ -2,7 +2,6 @@
 layout: post
 title:  "Unity 文件夹编译顺序"
 date:   2018-06-14 1.20 +0800
-categories: jekyll update
 ---
 # Unity 特殊文件夹编辑顺序
 

@@ -2,7 +2,6 @@
 layout: post
 title:  "正则表达式必知必会读书笔记"
 date:   2018-06-03 20:56 +0800
-categories: jekyll update
 ---
 # 简介
 
