@@ -15,7 +15,7 @@ date:   2018-07-08 16:00 +0800
 
 比如：我修改并了脚本 A，回到 Unity，Unity 自动编译，在编译期间修改并保存了脚本 B。编译完成之后，脚本 B 修改的部分极有可能没有被编译。
 
-## 问题原因
+## 找出原因
 
 1.检查了 Unity 的自动编译开关 Edit->Unity Preferences->General->Auto Refresh; 排查了 Unity 的设置问题
 ![auto Refresh](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/AutoRefresh.png?raw=true)
@@ -30,7 +30,7 @@ date:   2018-07-08 16:00 +0800
 
 2.关闭并重新打开 Unity，重新修改并保存编译失效脚本。
 
-## 总结
+## 总结与思考
 
 有两点疑问没有解决：
 1.Unity 最后编译时间存储在什么地方？
