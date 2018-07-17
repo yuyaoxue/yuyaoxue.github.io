@@ -14,6 +14,19 @@ date:   2018-07-15 22:00 +0800
 ## 问题复现
 
 为了验证 Bug 确实是资源卸载引起的，重新创建了一个全新的项目，将插件导入空项目中。
+
+### 运行环境
+
+SuperTextMesh：1.7.1
+
+OS：Windows 10，64 位操作系统，基于 x64 的处理器
+
+Unity：Unity 2017.4.2f2 (64-bit)
+
+Visual Studio：2017
+
+### 复现操作
+
 在场景中，创建 SuperTextMesh，Button；给 Button 添加点击事件，事件里调用 Resources.UnloadUnusedAssets()。开始运行，文字显示；点击按钮 Button， 文字消失。
 
 ## 找出原因
@@ -38,15 +51,15 @@ date:   2018-07-15 22:00 +0800
 
 ### 猜想四
 
-影响渲染的除了 Mesh，另一个是 Material；猜想 Material 可能丢失。这个是同事帮我调试出来的，发现了 Material 为 Null。后来我自己也调试了一下，文字消失的时候，通过打印，可以看到 Material 为 Null 最后得出原因是 Material 丢失。
+影响渲染的除了 Mesh，另一个是 Material；猜想 Material 可能丢失。这个是同事帮我调试出来的，发现了 Material 为 null。后来我自己也调试了一下，文字消失的时候，通过打印，可以看到 Material 为 null 最后得出原因是 Material 丢失。
 
 ## 解决方案
 
 ### 尝试解决
 
-想解决 Material 为 Null 这个问题，目前看起来比之前的要容易。就是在 Update() 里检测出 Material 为 Null 时,重新设置一下就可以，但是没有从根本上解决。
+想解决 Material 为 null 这个问题，目前看起来比之前的要容易。就是在 Update() 里检测出 Material 为 null 时,重新设置一下就可以，但是没有从根本上解决。
 
-在随后的排查中，我找到了存放 Material 的数据变量 newMats 发现他是一个局部变量，想修改为私有成员变量，这样就能看到这个值在问题出现的问题是否为 Null 了。结果怎么都复现不了问题了，一开始我还很诧异，怎么不复现了，后来回过神来，是我修改为成员变量的缘故，后来反复修改测试证实了我的猜想。随后查了成员变量和局部变量的作用域验证了我的想法。
+在随后的排查中，我找到了存放 Material 的数据变量 newMats 发现他是一个局部变量，想修改为私有成员变量，这样就能看到这个值在问题出现的问题是否为 null 了。结果怎么都复现不了问题了，一开始我还很诧异，怎么不复现了，后来回过神来，是我修改为成员变量的缘故，后来反复修改测试证实了我的猜想。随后查了成员变量和局部变量的作用域验证了我的想法。
 
 目前，我锁定 Material 丢失的原因是存储 Material 的变量 newMats 的生命周期比 SuperTextMesh 的生命周期短，导致在调用 Resources.UnloadUnusedAssets() 的时候，被标记为没有引用的内存清理掉。我的解决方法是将 ApplyMaterial() 的局部变量 newMats 为成员变量 ，以保证 newMats 的生命周期和 SuperTextMesh 的生命周期是一样的。
 
