@@ -9,7 +9,7 @@ date:   2018-08-05 20:00 +0800
 
 ## 测试
 
-同事提醒可能跟特效的父级的 Scale 有关系。经过测试，确实跟 Canvas 的 Scale 有关系。因为我们项目 UI 框架设计的原因，将 UIPanel 制作成 prefab 时，将 UIPanel 的 Active 设置为 false，在 UIPanel 在加载成功时，Canvas 的 Scale 为 0，设置 UIPanel.SetActive(true) 之后，Canvas 的 Scale 为 1。
+同事提醒可能跟特效的父级的 Scale 有关系。经过测试，确实跟 Canvas 的 Scale 有关系。因为我们项目 UI 框架设计的原因，将 UIPanel 制作成 prefab 时，将 UIPanel 的 Active 设置为 false；在 UIPanel 在加载成功时，Canvas 的 Scale 为 0，设置 UIPanel.SetActive(true) 之后，Canvas 的 Scale 为 1。
 
 ## 测试 Canvas 的 Scale 为 0 的原因
 
