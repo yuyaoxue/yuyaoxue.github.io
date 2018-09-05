@@ -52,4 +52,52 @@ default resources
 
 如果项目当中一些长时间不需要改动的脚本代码放到特殊文件夹里面，这些代码只需要编译一次，这样会缩短项目的编译时间。
 
-还需要看下Unity Script 相关的文档，再来做编译时间的总结。
+----------------------- DLL 分割线 --------------------------------
+
+## 程序集 DLL
+
+工作环境：
+
+语言：C#
+
+Unity 版本：2017.4.2f2
+
+Unity 项目里的 .cs 脚本文件最终都会编译成 DLL，存放在同 Assets 文件夹同级的 Library 文件夹下的 ScriptAssemblies 文件夹里面
+
+下图所示:
+
+![ScriptAssemblies文件截图](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/ScriptAssemblies.png?raw=true)
+
+第一部分介绍了脚本编译有四个不同的阶段
+
+第一阶段编译后生成：
+
+Assembly-CSharp-firstpass.dll
+
+第二阶段编译后生成：
+
+Assembly-CSharp-Editor-firstpass.dll
+
+第三阶段编辑后生成：
+
+Assembly-CSharp.dll
+
+第四阶段编译后生成：
+
+Assembly-CSharp-Editor.dll
+
+### 反编译 DLL 文件
+
+可以使用工具反编译 DLL，可以看到相互的依赖关系。
+
+我目前使用的是 [ILspy Releases](https://github.com/icsharpcode/ILSpy/releases)
+
+下图反编译结果：
+
+![Assembly-CSharp-firstpass](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/assembly-cssharp-firstpass.png?raw=true)
+
+![Assembly-CSharp-Editor-firstpass](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/assembly-cssharp-editor-firstpass.png?raw=true)
+
+![Assembly-CSharp](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/assembly-cssharp.png?raw=true)
+
+![Assembly-CSharp-Editor](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/assembly-cssharp-editor.pngraw=true)
