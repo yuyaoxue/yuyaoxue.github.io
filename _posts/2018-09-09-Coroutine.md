@@ -22,7 +22,7 @@ date:   2018-09-09 23:00 +0800
 
     Unity 在每一帧（Frame）都会去处理对象上的协程。Unity 主要是在 Update 后去处理协程（检查协程的条件是否满足）
 
-Coroutines 不是多线程, 不是异步技术, 协程都在 MainThread 中执行, 而且每个时刻只有一个 Coroutine 在执行. Coroutine 是一个 function, 可以部分执行, 当条件满足时, 未来会被再次执行直到整个函数执行完毕.
+Coroutines 不是多线程，不是异步技术，协程都在 MainThread 中执行，而且每个时刻只有一个 Coroutine 在执行。 Coroutine 是一个 function，可以部分执行，当条件满足时，未来会被再次执行直到整个函数执行完毕。
 
 ## 协程在 unity 脚本执行顺序的位置
 
@@ -32,24 +32,26 @@ Coroutines 不是多线程, 不是异步技术, 协程都在 MainThread 中执�
 
 根据协程的原理和协程在 Unity momo 脚本执行顺序做一个小测试来验证其原理。
 
-    public class Test : MonoBehaviour {
-     void Start () {
-        Debug.Log("A");
-        StartCoroutine(Test_Yield());
-        Debug.Log("B");
-	}
-     IEnumerator Test_Yield()
-     {
-        Debug.Log("C");
-        yield return StartCoroutine(TODO());
-        Debug.Log("D");
-     }
-     IEnumerator TODO()
-     {
-        Debug.Log("E");
-        yield return null;
-        Debug.Log("F");
-     }
+    public class Test : MonoBehaviour
+    {
+       void Start ()
+       {
+          Debug.Log("A");
+          StartCoroutine(Test_Yield());
+          Debug.Log("B");
+	    }
+        IEnumerator Test_Yield()
+        {
+          Debug.Log("C");
+          yield return StartCoroutine(TODO());
+          Debug.Log("D");
+        }
+        IEnumerator TODO()
+        {
+          Debug.Log("E");
+          yield return null;
+          Debug.Log("F");
+        }
     }
 
 打印结果：
@@ -81,10 +83,12 @@ Coroutines 不是多线程, 不是异步技术, 协程都在 MainThread 中执�
 
 测试 2：
 
-    public class Test2 : MonoBehaviour {
-     void Start () {
-        StartCoroutine(TestCoroutine());
-    }
+    public class Test2 : MonoBehaviour
+    {
+       void Start ()
+       {
+         StartCoroutine(TestCoroutine());
+       }
     IEnumerator TestCoroutine()
     {
         yield return new WaitForEndOfFrame();
@@ -97,14 +101,13 @@ Coroutines 不是多线程, 不是异步技术, 协程都在 MainThread 中执�
             Debug.Log("e："+e);
         }
     }
-
     private GameObject obj = null;
     }
 
 打印结果：
 
-     e：System.NullReferenceException: Object reference not set to an instance of an object
+    e：System.NullReferenceException: Object reference not set to an instance of an object
     at Test2+<TestCoroutine>c__Iterator0.MoveNext () [0x0004d] in D:\ruanjian\wrok\unity_project\CoroutineSamply\Assets\Scenes\Test2.cs:17
     UnityEngine.Debug:Log(Object)
     <TestCoroutine>c__Iterator0:MoveNext() (at Assets/Scenes/Test2.cs:21)
-结论：Coroutine 的普通语句可以可以使用 try catch 子句
+结论：Coroutine 的普通语句可以使用 try catch 子句。
