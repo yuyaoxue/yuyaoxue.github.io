@@ -111,3 +111,34 @@ Coroutines 不是多线程，不是异步技术，协程都在 MainThread 中执
     UnityEngine.Debug:Log(Object)
     <TestCoroutine>c__Iterator0:MoveNext() (at Assets/Scenes/Test2.cs:21)
 结论：Coroutine 的普通语句可以使用 try catch 子句。
+
+## 使用 Coroutinue 实现 WaitForMilliSeconds
+
+     public class Test : MonoBehaviour
+     {
+        void Start()
+        {
+            StartCoroutine(WaitForMilliSecondsCoroutine(2));
+        }
+
+        public IEnumerator WaitForMilliSecondsCoroutine(double milliseconds)
+        {
+             yield return StartRealtime(milliseconds);
+        }
+
+        private IEnumerator StartRealtime(double milliseconds)
+        {
+             double startTime = DateTime.Now.TimeOfDay.TotalMilliseconds;
+             Debug.Log("StartTime：" + startTime);
+             double totalTime = startTime + milliseconds;
+
+             while (DateTime.Now.TimeOfDay.TotalMilliseconds < totalTime)
+             {
+                Debug.Log("endTime：" + DateTime.Now.TimeOfDay.TotalMilliseconds);
+                yield return null;
+             }
+        }
+     }
+
+结果打印：
+![结果](https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/CoroutineTest.png?raw=true)
