@@ -8,19 +8,89 @@
 <meta name="generator" content="Hugo 0.48 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="">
 <meta name="keywords" content=", development, next-gen">
-<meta name="description" content="">
+<meta name="description" content="图文混排总结 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
+TextWithImage Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。
+TextInlineSprite 实现原理：（text中插入图片） 1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
+2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
+3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)
+4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)， 在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，
+5:性能未测试
+参考链接：TextInlineSprite
+EmojiText 实现原理：（文字和图片独立渲染） 这个方案目前想到有两个弊端：
+1：Outline、Shadow 使用时，图片也被处理的问题
+2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出
+参考链接：EmojiText (文字和图片独立渲染)
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+UGUI 图文混排解决方案和优化
+Super Text Mesh SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
+unityAssetStore 下载链接 Super Text Mesh">
 
 
-<meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404 Page not found">
-<meta name="twitter:title" content="404 Page not found">
-<meta property="og:url" content="">
-<meta property="twitter:url" content="">
+<meta property="og:description" content="图文混排总结 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
+TextWithImage Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。
+TextInlineSprite 实现原理：（text中插入图片） 1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
+2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
+3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)
+4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)， 在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，
+5:性能未测试
+参考链接：TextInlineSprite
+EmojiText 实现原理：（文字和图片独立渲染） 这个方案目前想到有两个弊端：
+1：Outline、Shadow 使用时，图片也被处理的问题
+2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出
+参考链接：EmojiText (文字和图片独立渲染)
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+UGUI 图文混排解决方案和优化
+Super Text Mesh SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
+unityAssetStore 下载链接 Super Text Mesh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图文混排总结">
+<meta name="twitter:title" content="图文混排总结">
+<meta property="og:url" content="www.xueyuyao.com/post/2018-05-23-supertextmesh/">
+<meta property="twitter:url" content="www.xueyuyao.com/post/2018-05-23-supertextmesh/">
 <meta property="og:site_name" content="薛玉瑶的博客">
-<meta property="og:description" content="">
-<meta name="twitter:description" content="">
+<meta property="og:description" content="图文混排总结 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
+TextWithImage Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。
+TextInlineSprite 实现原理：（text中插入图片） 1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
+2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
+3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)
+4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)， 在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，
+5:性能未测试
+参考链接：TextInlineSprite
+EmojiText 实现原理：（文字和图片独立渲染） 这个方案目前想到有两个弊端：
+1：Outline、Shadow 使用时，图片也被处理的问题
+2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出
+参考链接：EmojiText (文字和图片独立渲染)
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+UGUI 图文混排解决方案和优化
+Super Text Mesh SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
+unityAssetStore 下载链接 Super Text Mesh">
+<meta name="twitter:description" content="图文混排总结 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
+TextWithImage Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。
+TextInlineSprite 实现原理：（text中插入图片） 1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
+2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
+3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)
+4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)， 在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，
+5:性能未测试
+参考链接：TextInlineSprite
+EmojiText 实现原理：（文字和图片独立渲染） 这个方案目前想到有两个弊端：
+1：Outline、Shadow 使用时，图片也被处理的问题
+2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出
+参考链接：EmojiText (文字和图片独立渲染)
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+UGUI 图文混排解决方案和优化
+Super Text Mesh SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
+unityAssetStore 下载链接 Super Text Mesh">
 <meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2018-05-23T22:35:26">
+  
+  
+    <meta property="article:modified_time" content="2018-05-23T22:35:26">
+  
+  
+  
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -36,14 +106,14 @@
 
 
 
-    <title>404 Page not found</title>
+    <title>图文混排总结</title>
 
     <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="">
+    <link rel="canonical" href="www.xueyuyao.com/post/2018-05-23-supertextmesh/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -61,13 +131,349 @@
     
   </head>
 
-<main class="posts">
-  <article class="post">
-    <h1>404 Not Found</h1>
-    <p>Sorry, but we couldn't find the page you're looking for.</p>
-    <p>Please head back <a href="/">home</a>.</p>
-  </article>
-</main>
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/www.xueyuyao.com/">薛玉瑶的博客</a>
+  </div>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/www.xueyuyao.com/about/">
+    
+      <i class='fa fa-heart'></i>
+      
+      <span class="sidebar-button-desc">about hugo</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior=""
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      图文混排总结
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-23T22:35:26&#43;08:00">
+        
+  
+  
+  
+  
+    23  2018
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="图文混排总结">图文混排总结</h1>
+
+<p>最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。</p>
+
+<h2 id="textwithimage">TextWithImage</h2>
+
+<p>Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。</p>
+
+<h2 id="textinlinesprite">TextInlineSprite</h2>
+
+<p>实现原理：（text中插入图片）
+   1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）</p>
+
+<p>2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）</p>
+
+<p>3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)</p>
+
+<p>4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)，
+   在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，</p>
+
+<p>5:性能未测试</p>
+
+<p>参考链接：<a href="https://blog.csdn.net/qq992817263/article/details/51000744">TextInlineSprite</a></p>
+
+<h2 id="emojitext">EmojiText</h2>
+
+<p>实现原理：（文字和图片独立渲染）
+  这个方案目前想到有两个弊端：</p>
+
+<p>1：Outline、Shadow 使用时，图片也被处理的问题</p>
+
+<p>2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出</p>
+
+<p>参考链接：<a href="https://blog.uwa4d.com/archives/Sparkle_UGUI.html">EmojiText (文字和图片独立渲染)</a></p>
+
+<p>上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的</p>
+
+<p><a href="http://www.cnblogs.com/zsb517/p/6667050.html">UGUI 图文混排解决方案和优化</a></p>
+
+<h2 id="super-text-mesh">Super Text Mesh</h2>
+
+<p>SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。</p>
+
+<p>unityAssetStore 下载链接 <a href="https://assetstore.unity.com/packages/tools/gui/super-text-mesh-57995">Super Text Mesh</a></p>
+
+<p>1.导入 SuperTextMesh1.7.1</p>
+
+<p>新建一个 Unity 项目，然后双击 Super Text Mesh.unitypackage 导入 如图1.1</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE11_1526006366_19009.png?raw=true" alt="图 1.1" /></p>
+
+<p>图 1.1</p>
+
+<p>导入项目之后，接下来说下 SuperTextMesh 的使用流程。</p>
+
+<p>2.添加 Super Text Mesh 到 Scene</p>
+
+<p>1-&gt;创建 UI Super Text Mesh 如图 2.1</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE21_1526006495_27911.png?raw=true" alt="图 2.1" /></p>
+
+<p>如图 2.1</p>
+
+<p>2-&gt;创建 3D Super Text Mesh  如图 2.2</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE22_1526006523_32629.png?raw=true" alt="图 2.2" /></p>
+
+<p>图2.2</p>
+
+<p>我创建了一个 UI SuperTextMesh 创建之后如下图 2.3：</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE23_1526006541_5787.png?raw=true" alt="图 2.3" /></p>
+
+<p>图 2.3</p>
+
+<p>3.图文混排的实现</p>
+
+<p>在 Text 上输入<q=face>就可以显示出图片来.实现了图文混排，如上图 3.1 所示</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE31_1526006562_27080.png?raw=true" alt="图 3.1" /></p>
+
+<p>图3.1</p>
+
+<p>Game窗口显示效果：</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE32_1526006593_23188.png?raw=true" alt="图 3.2" /></p>
+
+<p>图 3.2</p>
+
+<p>“face” 是 face.asset 文件；SuperTextMesh 里的资源加载方式是通过 Resources.Load()；
+如果需要修改加载资源方式，可以在 SuperTextMeshData 类文件修改。
+创建 .asset 文件-&gt;在 Project 里的 Resource 文件夹右击-&gt;Create-&gt;Super Text Mesh  出来的 Data 数据就是你可以创建的数据文件了，
+如下图 3.3，3.4 所示：</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE33_1526006610_27818.png?raw=true" alt="图 3.3" /></p>
+
+<p>图 3.3</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE34_1526006630_24233.png?raw=true" alt="图 3.4" /></p>
+
+<p>图 3.4</p>
+
+<p>SuperTextMesh 里面的相关参数的使用官方文档里有详细的解释，我在这里就不赘述了。</p>
+
+<p>文档链接:<a href="http://supertextmesh.com/docs/SuperTextMesh.html">SuperTextMesh 官方文档</a></p>
+
+<p>接下来说下根据我公司的项目需求对源码做了哪些扩展。</p>
+
+<p>1.显示方面
+ size:  可以在 .asset 文件上，或者通过 <s=1.2f> 修改 size （是个比例值，相对于被插入的文本的大小），默认是 1；如果需要设置 size，会涉及到一个位置偏移的问题，需要设置 .asset 文件上的 offset 参数， 目前 size 设置的是 1.2 offset.y : -0.2（具体根据实际情况设置）</p>
+
+<p>2.颜色格式
+SuperTextMesh 里的颜色格式是 <c=name></c> 或者 <c=hexcolor></c>hexcolor 不包括 #，0x 的字符检测。
+结合项目的需求，添加了 “<color></color>” 的颜色格式，在检测颜色字符里添加了 “#，x0”</p>
+
+<p>3.加载资源
+Super Text Mesh 的例子中加载 .asset 文件是通过 Resource.load 加载的(.asset 文件，SuperTextMesh 预制体)，项目中目前使用的是 AssetBundle 的异步加载，</p>
+
+<pre><code> 1&gt;:  目前将 .asset 文件修改为异步加载了，LoadQuadAssets.cs
+
+ 2&gt;:  SuperTextMesh 预制体目前还是使用 Resource.Load 加载
+</code></pre>
+
+<p>4.布局排版问题
+1.6 版本: 之前用的 1.6 版本布局排版有问题)我们聊天有个需求是背景框会根据聊天内容来调整背景框的宽高使用 layout，
+在设置 HorizontalLayoutGroup 下，Super Text Mesh 的 width height 一直是 0 导致背景框无法做相应的缩放</p>
+
+<p>1.7.1 版本: 2018 年 4 月 27 日发布的 1.7.1 支持自定义布局，需要对应加入 ContentSize Fitter；Super text mesh 没有在代码里修改过 height，width 会随着 Content Size Fitter 的控制为变化； SuperTextMesh 里的 height 有一个作用是这个文本框的最大垂直空间，如果 rect.height 的值为 0 则无限制。</p>
+
+<p>问题:对于我们项目来说，有一个问题:我们是需要根据文本的行数去动态的设置文本背景框的宽高， 这个是根据 text 的 height 值来进行变化的，所以需要我们通过代码来设置 height。</p>
+
+<p>解决：在 text 上添加一个 layout element 组件，我们可以根据 SuperTextMesh 里的本文的边框来计算出来文本框的高度，RecalculateBounds() 方法里重新计算边框的四个点，可以通过这四个点计算出宽高，然后写一个委托把值传到 Layout Element 里，就可以了。</p>
+
+<p>5.不同分辨率适配：
+如果项目中的 Canvas 的 Canvas Scaler mode 为 Scale With Screen Size ，那么 text 的显示就会跟分辨率有关系。</p>
+
+<p>原因：text 的虚拟边框的数据跟所在跟自身以及所有父节点的 Scale 有关系， Super Text Mesh 代码中在计算边框时使用到了 Transform.TransformPoint，而 TransformPoint 是跟自身以及所有父节点的 Scale 值有关系，所以如果需要获取 text 的虚拟边框值，需要注意下这点。</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE61_1526006647_20181.png?raw=true" alt="图 6.1" /></p>
+
+<p>图 6.1   蓝色框时虚拟框</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/_%E5%9B%BE62_1526006662_12044.png?raw=true" alt="图 6.2" /></p>
+
+<p>图 6.2   计算边框代码位置</p>
+
+<p>最后： 图文混排在 SuperTextMesh 只是冰山一角，有时间实践下其他的功能。</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-05-27-debuging/" data-tooltip="调试九法">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-05-23-learnroads/" data-tooltip="学习之路">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 薛玉瑶的博客. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-05-27-debuging/" data-tooltip="调试九法">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-05-23-learnroads/" data-tooltip="学习之路">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
     
     <div id="about">
   <div id="about-card">
@@ -398,6 +804,10 @@ function updateMinWidth() {
 }
 </script>
 
+
+  
+    
+  
 
 
 

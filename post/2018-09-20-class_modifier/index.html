@@ -8,19 +8,93 @@
 <meta name="generator" content="Hugo 0.48 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="">
 <meta name="keywords" content=", development, next-gen">
-<meta name="description" content="">
+<meta name="description" content="前言 C# 中的访问修饰符和声明修饰符挺多的，总结一下，做个记录。
+访问修饰符 访问修饰符通常作为声明字段数据类型的前缀，它标识了所修饰成员的封装级别。可以选择 5 个访问修饰符，即 public、private、protected、internal和 protected internal。
+public 公有的：显式指明可从类的外部访问被它修饰的字段。
+private 私有的：只有在声明它们的类和结构中才可以访问。如果不为类成员添加修饰符，那么默认使用的是 private。成员默认为私有成员，公共成员必须显式指定。
+protected 受保护的：可在基类中定义只有派生类才能访问的成员。
+internal 内部的，同一个程序集中的所有类都可以访问。
+protected internal 访问级别为 internal 或 protected。即，“同一个程序集中的所有类，以及所有程序集中的子类都可以访问。
+声明修饰符 目前了解的声明修饰符有 8 个，即 partial、static、abstract、Sealed、Virtual、Override、New、Extern。
+Partial 在整个同一程序集中定义分部类和结构。
+Static 声明属于类型本身而不是属于特定对象的成员。
+Abstract 抽象类不可实例化，只能是其他类的基类。类中的方法只声明不实现，方法的实现在他的派生类中完成。其作用是强制所有派生类提供实现。
+Sealed 对类使用 sealed 修饰符可以禁止从该类继承。
+Virtual 用于修饰方法、属性、索引器或事件声明，并且允许在派生类中重写这些对象。
+规则：虚方法只提供默认实现，这种实现可由派生类完全重写；“运行时”遇到虚方法时，他会调用虚成员派生得最远的，重写的实现。
+Override 提供从基类继承的成员的新实现。
+New 作为修饰符，在基类面前隐藏了派生类重新声明的成员，在不使用 new 修饰符的情况下隐藏成员是允许的，但会生成警告。作为运算符，用于创建对象和调用构造函数。
+Extern 用于声明在外部实现的方法。 extern 修饰符的常见用法是在使用 Interop 服务调入非托管代码时与 DllImport 特性一起使用。 在这种情况下，还必须将方法声明为 static。">
 
 
-<meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404 Page not found">
-<meta name="twitter:title" content="404 Page not found">
-<meta property="og:url" content="">
-<meta property="twitter:url" content="">
+<meta property="og:description" content="前言 C# 中的访问修饰符和声明修饰符挺多的，总结一下，做个记录。
+访问修饰符 访问修饰符通常作为声明字段数据类型的前缀，它标识了所修饰成员的封装级别。可以选择 5 个访问修饰符，即 public、private、protected、internal和 protected internal。
+public 公有的：显式指明可从类的外部访问被它修饰的字段。
+private 私有的：只有在声明它们的类和结构中才可以访问。如果不为类成员添加修饰符，那么默认使用的是 private。成员默认为私有成员，公共成员必须显式指定。
+protected 受保护的：可在基类中定义只有派生类才能访问的成员。
+internal 内部的，同一个程序集中的所有类都可以访问。
+protected internal 访问级别为 internal 或 protected。即，“同一个程序集中的所有类，以及所有程序集中的子类都可以访问。
+声明修饰符 目前了解的声明修饰符有 8 个，即 partial、static、abstract、Sealed、Virtual、Override、New、Extern。
+Partial 在整个同一程序集中定义分部类和结构。
+Static 声明属于类型本身而不是属于特定对象的成员。
+Abstract 抽象类不可实例化，只能是其他类的基类。类中的方法只声明不实现，方法的实现在他的派生类中完成。其作用是强制所有派生类提供实现。
+Sealed 对类使用 sealed 修饰符可以禁止从该类继承。
+Virtual 用于修饰方法、属性、索引器或事件声明，并且允许在派生类中重写这些对象。
+规则：虚方法只提供默认实现，这种实现可由派生类完全重写；“运行时”遇到虚方法时，他会调用虚成员派生得最远的，重写的实现。
+Override 提供从基类继承的成员的新实现。
+New 作为修饰符，在基类面前隐藏了派生类重新声明的成员，在不使用 new 修饰符的情况下隐藏成员是允许的，但会生成警告。作为运算符，用于创建对象和调用构造函数。
+Extern 用于声明在外部实现的方法。 extern 修饰符的常见用法是在使用 Interop 服务调入非托管代码时与 DllImport 特性一起使用。 在这种情况下，还必须将方法声明为 static。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 中的访问修饰符和声明修饰符">
+<meta name="twitter:title" content="C# 中的访问修饰符和声明修饰符">
+<meta property="og:url" content="www.xueyuyao.com/post/2018-09-20-class_modifier/">
+<meta property="twitter:url" content="www.xueyuyao.com/post/2018-09-20-class_modifier/">
 <meta property="og:site_name" content="薛玉瑶的博客">
-<meta property="og:description" content="">
-<meta name="twitter:description" content="">
+<meta property="og:description" content="前言 C# 中的访问修饰符和声明修饰符挺多的，总结一下，做个记录。
+访问修饰符 访问修饰符通常作为声明字段数据类型的前缀，它标识了所修饰成员的封装级别。可以选择 5 个访问修饰符，即 public、private、protected、internal和 protected internal。
+public 公有的：显式指明可从类的外部访问被它修饰的字段。
+private 私有的：只有在声明它们的类和结构中才可以访问。如果不为类成员添加修饰符，那么默认使用的是 private。成员默认为私有成员，公共成员必须显式指定。
+protected 受保护的：可在基类中定义只有派生类才能访问的成员。
+internal 内部的，同一个程序集中的所有类都可以访问。
+protected internal 访问级别为 internal 或 protected。即，“同一个程序集中的所有类，以及所有程序集中的子类都可以访问。
+声明修饰符 目前了解的声明修饰符有 8 个，即 partial、static、abstract、Sealed、Virtual、Override、New、Extern。
+Partial 在整个同一程序集中定义分部类和结构。
+Static 声明属于类型本身而不是属于特定对象的成员。
+Abstract 抽象类不可实例化，只能是其他类的基类。类中的方法只声明不实现，方法的实现在他的派生类中完成。其作用是强制所有派生类提供实现。
+Sealed 对类使用 sealed 修饰符可以禁止从该类继承。
+Virtual 用于修饰方法、属性、索引器或事件声明，并且允许在派生类中重写这些对象。
+规则：虚方法只提供默认实现，这种实现可由派生类完全重写；“运行时”遇到虚方法时，他会调用虚成员派生得最远的，重写的实现。
+Override 提供从基类继承的成员的新实现。
+New 作为修饰符，在基类面前隐藏了派生类重新声明的成员，在不使用 new 修饰符的情况下隐藏成员是允许的，但会生成警告。作为运算符，用于创建对象和调用构造函数。
+Extern 用于声明在外部实现的方法。 extern 修饰符的常见用法是在使用 Interop 服务调入非托管代码时与 DllImport 特性一起使用。 在这种情况下，还必须将方法声明为 static。">
+<meta name="twitter:description" content="前言 C# 中的访问修饰符和声明修饰符挺多的，总结一下，做个记录。
+访问修饰符 访问修饰符通常作为声明字段数据类型的前缀，它标识了所修饰成员的封装级别。可以选择 5 个访问修饰符，即 public、private、protected、internal和 protected internal。
+public 公有的：显式指明可从类的外部访问被它修饰的字段。
+private 私有的：只有在声明它们的类和结构中才可以访问。如果不为类成员添加修饰符，那么默认使用的是 private。成员默认为私有成员，公共成员必须显式指定。
+protected 受保护的：可在基类中定义只有派生类才能访问的成员。
+internal 内部的，同一个程序集中的所有类都可以访问。
+protected internal 访问级别为 internal 或 protected。即，“同一个程序集中的所有类，以及所有程序集中的子类都可以访问。
+声明修饰符 目前了解的声明修饰符有 8 个，即 partial、static、abstract、Sealed、Virtual、Override、New、Extern。
+Partial 在整个同一程序集中定义分部类和结构。
+Static 声明属于类型本身而不是属于特定对象的成员。
+Abstract 抽象类不可实例化，只能是其他类的基类。类中的方法只声明不实现，方法的实现在他的派生类中完成。其作用是强制所有派生类提供实现。
+Sealed 对类使用 sealed 修饰符可以禁止从该类继承。
+Virtual 用于修饰方法、属性、索引器或事件声明，并且允许在派生类中重写这些对象。
+规则：虚方法只提供默认实现，这种实现可由派生类完全重写；“运行时”遇到虚方法时，他会调用虚成员派生得最远的，重写的实现。
+Override 提供从基类继承的成员的新实现。
+New 作为修饰符，在基类面前隐藏了派生类重新声明的成员，在不使用 new 修饰符的情况下隐藏成员是允许的，但会生成警告。作为运算符，用于创建对象和调用构造函数。
+Extern 用于声明在外部实现的方法。 extern 修饰符的常见用法是在使用 Interop 服务调入非托管代码时与 DllImport 特性一起使用。 在这种情况下，还必须将方法声明为 static。">
 <meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2018-09-20T22:35:26">
+  
+  
+    <meta property="article:modified_time" content="2018-09-20T22:35:26">
+  
+  
+  
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -36,14 +110,14 @@
 
 
 
-    <title>404 Page not found</title>
+    <title>C# 中的访问修饰符和声明修饰符</title>
 
     <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="">
+    <link rel="canonical" href="www.xueyuyao.com/post/2018-09-20-class_modifier/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -61,13 +135,267 @@
     
   </head>
 
-<main class="posts">
-  <article class="post">
-    <h1>404 Not Found</h1>
-    <p>Sorry, but we couldn't find the page you're looking for.</p>
-    <p>Please head back <a href="/">home</a>.</p>
-  </article>
-</main>
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/www.xueyuyao.com/">薛玉瑶的博客</a>
+  </div>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/www.xueyuyao.com/about/">
+    
+      <i class='fa fa-heart'></i>
+      
+      <span class="sidebar-button-desc">about hugo</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior=""
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      C# 中的访问修饰符和声明修饰符
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-09-20T22:35:26&#43;08:00">
+        
+  
+  
+  
+  
+    20  2018
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="前言">前言</h1>
+
+<p>C# 中的访问修饰符和声明修饰符挺多的，总结一下，做个记录。</p>
+
+<h2 id="访问修饰符">访问修饰符</h2>
+
+<p>访问修饰符通常作为声明字段数据类型的前缀，它标识了所修饰成员的封装级别。可以选择 5 个访问修饰符，即 public、private、protected、internal和 protected internal。</p>
+
+<h3 id="public">public</h3>
+
+<p>公有的：显式指明可从类的外部访问被它修饰的字段。</p>
+
+<h3 id="private">private</h3>
+
+<p>私有的：只有在声明它们的类和结构中才可以访问。如果不为类成员添加修饰符，那么默认使用的是 private。成员默认为私有成员，公共成员必须显式指定。</p>
+
+<h3 id="protected">protected</h3>
+
+<p>受保护的：可在基类中定义只有派生类才能访问的成员。</p>
+
+<h3 id="internal">internal</h3>
+
+<p>内部的，同一个程序集中的所有类都可以访问。</p>
+
+<h3 id="protected-internal">protected internal</h3>
+
+<p>访问级别为 internal 或 protected。即，“同一个程序集中的所有类，以及所有程序集中的子类都可以访问。</p>
+
+<h2 id="声明修饰符">声明修饰符</h2>
+
+<p>目前了解的声明修饰符有 8 个，即 partial、static、abstract、Sealed、Virtual、Override、New、Extern。</p>
+
+<h3 id="partial">Partial</h3>
+
+<p>在整个同一程序集中定义分部类和结构。</p>
+
+<h3 id="static">Static</h3>
+
+<p>声明属于类型本身而不是属于特定对象的成员。</p>
+
+<h3 id="abstract">Abstract</h3>
+
+<p>抽象类不可实例化，只能是其他类的基类。类中的方法只声明不实现，方法的实现在他的派生类中完成。其作用是强制所有派生类提供实现。</p>
+
+<h3 id="sealed">Sealed</h3>
+
+<p>对类使用 sealed 修饰符可以禁止从该类继承。</p>
+
+<h3 id="virtual">Virtual</h3>
+
+<p>用于修饰方法、属性、索引器或事件声明，并且允许在派生类中重写这些对象。</p>
+
+<p>规则：虚方法只提供默认实现，这种实现可由派生类完全重写；“运行时”遇到虚方法时，他会调用虚成员派生得最远的，重写的实现。</p>
+
+<h3 id="override">Override</h3>
+
+<p>提供从基类继承的成员的新实现。</p>
+
+<h3 id="new">New</h3>
+
+<p>作为修饰符，在基类面前隐藏了派生类重新声明的成员，在不使用 new 修饰符的情况下隐藏成员是允许的，但会生成警告。作为运算符，用于创建对象和调用构造函数。</p>
+
+<h3 id="extern">Extern</h3>
+
+<p>用于声明在外部实现的方法。 extern 修饰符的常见用法是在使用 Interop 服务调入非托管代码时与 DllImport 特性一起使用。 在这种情况下，还必须将方法声明为 static。</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-09-09-coroutine/" data-tooltip="浅谈协程">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 薛玉瑶的博客. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-09-09-coroutine/" data-tooltip="浅谈协程">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
     
     <div id="about">
   <div id="about-card">
@@ -398,6 +726,10 @@ function updateMinWidth() {
 }
 </script>
 
+
+  
+    
+  
 
 
 
