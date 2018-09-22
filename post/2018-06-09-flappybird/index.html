@@ -8,19 +8,133 @@
 <meta name="generator" content="Hugo 0.48 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="">
 <meta name="keywords" content=", development, next-gen">
-<meta name="description" content="">
+<meta name="description" content="FlappyBird 制作进度： 1.创建 GitHub 仓库；
+2.安装 Unity2018.1.0b12,创建 Unity 工程，导入项目资源；
+3.处理图集；
+4.整理整体思路，创建相关文件夹以及目前会涉及到的脚本；
+5.根据背景图大小设置 Camera 的相关参数；
+6.制作 Bird ,Wall 等预制体以及相关动画；
+7.制作 Start、GameOver、Score 等 UI 界面。
+FlappyBird 制作进度 6月9号 1.创建游戏状态机，bird的状态机
+2.Bird 默认飞行，按键向上飞行
+3.Bird 与 Walls、Ground 的碰撞检测
+剩余功能：
+1.动态加载 Wall、ground、bird。
+2.Audio 音效系统
+3.完善状态机，将游戏流程串联起来。
+4.评分机制
+5.游戏模式：简单，复杂，困难
+FlappyBird 制作进度 6月11号 1.简易 UIManager
+2搭建（Start, Ready,Gameover）界面；
+3.Bird 的碰撞检测;
+4.Ground Pipe 循环移动;
+5.创建 GameMansger 实现游戏循环；
+未完成部分:
+1.音效管理器；
+2.根据选择的不同难度，Pipe 的动态加载；
+3.加分机制（加分，本地数据存储）；
+4.随机背景颜色；
+5.Bird （随机颜色，上升掉落角度调整）;">
 
 
-<meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404 Page not found">
-<meta name="twitter:title" content="404 Page not found">
-<meta property="og:url" content="">
-<meta property="twitter:url" content="">
+<meta property="og:description" content="FlappyBird 制作进度： 1.创建 GitHub 仓库；
+2.安装 Unity2018.1.0b12,创建 Unity 工程，导入项目资源；
+3.处理图集；
+4.整理整体思路，创建相关文件夹以及目前会涉及到的脚本；
+5.根据背景图大小设置 Camera 的相关参数；
+6.制作 Bird ,Wall 等预制体以及相关动画；
+7.制作 Start、GameOver、Score 等 UI 界面。
+FlappyBird 制作进度 6月9号 1.创建游戏状态机，bird的状态机
+2.Bird 默认飞行，按键向上飞行
+3.Bird 与 Walls、Ground 的碰撞检测
+剩余功能：
+1.动态加载 Wall、ground、bird。
+2.Audio 音效系统
+3.完善状态机，将游戏流程串联起来。
+4.评分机制
+5.游戏模式：简单，复杂，困难
+FlappyBird 制作进度 6月11号 1.简易 UIManager
+2搭建（Start, Ready,Gameover）界面；
+3.Bird 的碰撞检测;
+4.Ground Pipe 循环移动;
+5.创建 GameMansger 实现游戏循环；
+未完成部分:
+1.音效管理器；
+2.根据选择的不同难度，Pipe 的动态加载；
+3.加分机制（加分，本地数据存储）；
+4.随机背景颜色；
+5.Bird （随机颜色，上升掉落角度调整）;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FlappyBird 制作进度">
+<meta name="twitter:title" content="FlappyBird 制作进度">
+<meta property="og:url" content="www.xueyuyao.com/post/2018-06-09-flappybird/">
+<meta property="twitter:url" content="www.xueyuyao.com/post/2018-06-09-flappybird/">
 <meta property="og:site_name" content="薛玉瑶的博客">
-<meta property="og:description" content="">
-<meta name="twitter:description" content="">
+<meta property="og:description" content="FlappyBird 制作进度： 1.创建 GitHub 仓库；
+2.安装 Unity2018.1.0b12,创建 Unity 工程，导入项目资源；
+3.处理图集；
+4.整理整体思路，创建相关文件夹以及目前会涉及到的脚本；
+5.根据背景图大小设置 Camera 的相关参数；
+6.制作 Bird ,Wall 等预制体以及相关动画；
+7.制作 Start、GameOver、Score 等 UI 界面。
+FlappyBird 制作进度 6月9号 1.创建游戏状态机，bird的状态机
+2.Bird 默认飞行，按键向上飞行
+3.Bird 与 Walls、Ground 的碰撞检测
+剩余功能：
+1.动态加载 Wall、ground、bird。
+2.Audio 音效系统
+3.完善状态机，将游戏流程串联起来。
+4.评分机制
+5.游戏模式：简单，复杂，困难
+FlappyBird 制作进度 6月11号 1.简易 UIManager
+2搭建（Start, Ready,Gameover）界面；
+3.Bird 的碰撞检测;
+4.Ground Pipe 循环移动;
+5.创建 GameMansger 实现游戏循环；
+未完成部分:
+1.音效管理器；
+2.根据选择的不同难度，Pipe 的动态加载；
+3.加分机制（加分，本地数据存储）；
+4.随机背景颜色；
+5.Bird （随机颜色，上升掉落角度调整）;">
+<meta name="twitter:description" content="FlappyBird 制作进度： 1.创建 GitHub 仓库；
+2.安装 Unity2018.1.0b12,创建 Unity 工程，导入项目资源；
+3.处理图集；
+4.整理整体思路，创建相关文件夹以及目前会涉及到的脚本；
+5.根据背景图大小设置 Camera 的相关参数；
+6.制作 Bird ,Wall 等预制体以及相关动画；
+7.制作 Start、GameOver、Score 等 UI 界面。
+FlappyBird 制作进度 6月9号 1.创建游戏状态机，bird的状态机
+2.Bird 默认飞行，按键向上飞行
+3.Bird 与 Walls、Ground 的碰撞检测
+剩余功能：
+1.动态加载 Wall、ground、bird。
+2.Audio 音效系统
+3.完善状态机，将游戏流程串联起来。
+4.评分机制
+5.游戏模式：简单，复杂，困难
+FlappyBird 制作进度 6月11号 1.简易 UIManager
+2搭建（Start, Ready,Gameover）界面；
+3.Bird 的碰撞检测;
+4.Ground Pipe 循环移动;
+5.创建 GameMansger 实现游戏循环；
+未完成部分:
+1.音效管理器；
+2.根据选择的不同难度，Pipe 的动态加载；
+3.加分机制（加分，本地数据存储）；
+4.随机背景颜色；
+5.Bird （随机颜色，上升掉落角度调整）;">
 <meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2018-06-09T22:35:26">
+  
+  
+    <meta property="article:modified_time" content="2018-06-09T22:35:26">
+  
+  
+  
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -36,14 +150,14 @@
 
 
 
-    <title>404 Page not found</title>
+    <title>FlappyBird 制作进度</title>
 
     <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="">
+    <link rel="canonical" href="www.xueyuyao.com/post/2018-06-09-flappybird/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -61,13 +175,261 @@
     
   </head>
 
-<main class="posts">
-  <article class="post">
-    <h1>404 Not Found</h1>
-    <p>Sorry, but we couldn't find the page you're looking for.</p>
-    <p>Please head back <a href="/">home</a>.</p>
-  </article>
-</main>
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/www.xueyuyao.com/">薛玉瑶的博客</a>
+  </div>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/www.xueyuyao.com/about/">
+    
+      <i class='fa fa-heart'></i>
+      
+      <span class="sidebar-button-desc">about hugo</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior=""
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      FlappyBird 制作进度
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-06-09T22:35:26&#43;08:00">
+        
+  
+  
+  
+  
+    9  2018
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="flappybird-制作进度">FlappyBird 制作进度：</h1>
+
+<p>1.创建 GitHub 仓库；</p>
+
+<p>2.安装 Unity2018.1.0b12,创建 Unity 工程，导入项目资源；</p>
+
+<p>3.处理图集；</p>
+
+<p>4.整理整体思路，创建相关文件夹以及目前会涉及到的脚本；</p>
+
+<p>5.根据背景图大小设置 Camera 的相关参数；</p>
+
+<p>6.制作 Bird ,Wall 等预制体以及相关动画；</p>
+
+<p>7.制作 Start、GameOver、Score 等 UI 界面。</p>
+
+<h2 id="flappybird-制作进度-6月9号">FlappyBird 制作进度 6月9号</h2>
+
+<p>1.创建游戏状态机，bird的状态机</p>
+
+<p>2.Bird 默认飞行，按键向上飞行</p>
+
+<p>3.Bird 与 Walls、Ground 的碰撞检测</p>
+
+<p>剩余功能：</p>
+
+<p>1.动态加载 Wall、ground、bird。</p>
+
+<p>2.Audio 音效系统</p>
+
+<p>3.完善状态机，将游戏流程串联起来。</p>
+
+<p>4.评分机制</p>
+
+<p>5.游戏模式：简单，复杂，困难</p>
+
+<h2 id="flappybird-制作进度-6月11号">FlappyBird 制作进度 6月11号</h2>
+
+<p>1.简易 UIManager</p>
+
+<p>2搭建（Start, Ready,Gameover）界面；</p>
+
+<p>3.Bird 的碰撞检测;</p>
+
+<p>4.Ground Pipe 循环移动;</p>
+
+<p>5.创建 GameMansger 实现游戏循环；</p>
+
+<p>未完成部分:</p>
+
+<p>1.音效管理器；</p>
+
+<p>2.根据选择的不同难度，Pipe 的动态加载；</p>
+
+<p>3.加分机制（加分，本地数据存储）；</p>
+
+<p>4.随机背景颜色；</p>
+
+<p>5.Bird （随机颜色，上升掉落角度调整）;</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-06-14-unitycompilation/" data-tooltip="Unity 文件夹编译顺序">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-06-03-regexnote/" data-tooltip="正则表达式必知必会读书笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 薛玉瑶的博客. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-06-14-unitycompilation/" data-tooltip="Unity 文件夹编译顺序">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="www.xueyuyao.com/post/2018-06-03-regexnote/" data-tooltip="正则表达式必知必会读书笔记">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
     
     <div id="about">
   <div id="about-card">
@@ -398,6 +760,10 @@ function updateMinWidth() {
 }
 </script>
 
+
+  
+    
+  
 
 
 
