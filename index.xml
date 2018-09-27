@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Copyright notice</copyright>
-    <lastBuildDate>Thu, 27 Sep 2018 14:10:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Sep 2018 23:30:24 +0800</lastBuildDate>
     
 	<atom:link href="https://www.xueyuyao.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unity 2017 Game Optimization 脑图</title>
+      <link>https://www.xueyuyao.com/2018/09/27/2018-09-27-unity-2017-game-optimization/</link>
+      <pubDate>Thu, 27 Sep 2018 23:30:24 +0800</pubDate>
+      
+      <guid>https://www.xueyuyao.com/2018/09/27/2018-09-27-unity-2017-game-optimization/</guid>
+      <description>前言 最近一直在看一本有关 Unity 优化的书。书里面对于 Unity 优化点讲的很详细，我就以脑图的形式整理一下优化点。
+结束 目前只整理出了三章的内容，之后会逐步更新其他的章节的内容。</description>
+    </item>
     
     <item>
       <title>使用 hugo&#43;github pages 搭建个人博客</title>
