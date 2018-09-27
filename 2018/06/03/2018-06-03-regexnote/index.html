@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" 正则表达式必知必会读书笔记 &middot;  薛玉瑶的博客" />
+  
+  <meta name="theme-color" content="#hexcolor" />
+ 
+  <meta property="og:site_name" content="薛玉瑶的博客" />
+  <meta property="og:url" content="http://www.xueyuyao.com/2018/06/03/2018-06-03-regexnote/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2018-06-03T22:35:26&#43;08:00" />
+  
+  
+
+  <title>
+     正则表达式必知必会读书笔记 &middot;  薛玉瑶的博客
+  </title>
+
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
+      
+      <div class="tag-line">
+        每天都是一种练习
+      </div>
+      
+      <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+      
+      <a href="http://www.xueyuyao.com" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+<article>
+  <header>
+    <h1 class="text-primary">正则表达式必知必会读书笔记</h1>
+    <div class="post-meta clearfix">
+    
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-06-03T22:35:26&#43;08:00">
+          Jun 3, 2018
+        </time>
+      </div>
+    
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<h1 id="简介">简介</h1>
+
+<p>正则表达式是一些用来匹配和处理文本的字符串。正则表达式是用正则表达式语言创建的，没有能够直接安装并运行的程序，是内置与其他语言或软件产品里的迷你语言。几乎所有的语言或工具都支持正则表达式。语法是正则表达式最容易掌握的部分，真正的挑战市学会如何运用那些语法把实际问题分解为一系列正则表达式并最终解决，所以必需通过实践才能真正掌握他们。</p>
+
+<p>例外，正则表达式里区分大小写的，大多数正则表达式里的实现也支持不区分字母大小写的匹配操作。</p>
+
+<h2 id="匹配单个字符">匹配单个字符</h2>
+
+<p>“.” 字符是元字符，可以匹配任意单个字符，确切得说：只能匹配出了换行符以外得任何单个字符。</p>
+
+<p>匹配特殊字符：</p>
+
+<p>“.”  在正则表达式里有特殊含义，如果想要匹配字符本身的话，要在前面加上 “\” 来对他进行转义。
+“\” 是元字符，用来对字符进行转义，在正则表达式里，有特殊含义得字符序列总是以 “\” 字符开头</p>
+
+<h2 id="匹配一组字符">匹配一组字符</h2>
+
+<p>左括号 [ 是元字符，它标志着一个字符集合的开始；右括号 ] 是元字符，它标志着一个字符集合的结束。</p>
+
+<p>使用 元字符 [ 和 ] 定义一个字符集合，必须匹配该集合里的字符之一。[ ] 里可以写你要匹配的字符，如：[a],[abcdefg]；也可以匹配字符区间 [0-9]，[A-Z]；也可以取非字符 [^0-9]</p>
+
+<p>连字符：</p>
+
+<p>“-” (连字符) 是一个特殊的元字符，作为元字符只能在 [ 和 ] 之间，在字符集合以外的地方，只是一个普通字符，只能与 “-” 本身相匹配。（因此，在正则表达式里，“-” 字符不需要被转义 “?” 需要做测试）</p>
+
+<p>取非字符：</p>
+
+<p>字符集合通常用来指定一组必需匹配其中之一的字符，但在某些场合，需要反过来做，给出一组不需要得到的字符。即：除了那个字符集和里的字符，其他字符都可以匹配。
+使用 “^” 元字符表明想对一个字符集合进行取非匹配。</p>
+
+<p>“^” 的效果将作用于给定字符集和里的所有字符或字符区间，而不是仅限于紧跟在 “^” 字符后面的那一个字符或者字符区间。</p>
+
+<h2 id="使用元字符">使用元字符</h2>
+
+<p>元字符大致分为两种：一种是用来匹配文本的，比如（.），另一种是正则表达式中的语法所要求的（比如 [ 和 ] ）</p>
+
+<p>对特殊字符进行转义</p>
+
+<p>元字符是一些在正则表达式里有着特殊含义的字符。因为有着特殊的含义，所以这些字符就无法用来表达它们本身，所以就需要一个转义字符 “\”  ，例如 “.” 将匹配到这个字符本身，而不是它的特殊含义。</p>
+
+<p>任何一个元字符都可以通过给它加上一个反斜杠字符（\）作为前缀的方法来转义。</p>
+
+<p>note：配对的元字符 比如 [ 或 ] 不用作元字符时必须转义，否则正则表达式分析器很可能会抛出一个错误。</p>
+
+<p>“\” 字符也是一个元字符，他的特殊含义是对其他元字符进行转义。</p>
+
+<p>在一个完整的正则表达式里，字符 “\” 的后面永远跟着另一个字符。</p>
+
+<p>匹配空白字符</p>
+
+<p>[\b] 回退（并删除）一个字符（Backspace键）；
+[\f] 换页符；
+[\n] 换行符；
+[\r] 回车符；
+[\t] 制表符（Tab键）；
+[\v] 垂直制表符。</p>
+
+<p>\r\n 是 Windows 所使用的文本行结束标签。Unix 和 Linux 系统 只使用一个换行符来结束一行文本行，所以，在 Unix/Linux 系统上匹配空白行只使用 \n\n 即可，不需要加上 \r。</p>
+
+<p>匹配特定的字符类别</p>
+
+<p>字符类：一些常用的字符集合可以用特殊元字符来代替，这些元字符匹配的是某一个类别的字符（字符类）。</p>
+
+<p>匹配数字 (与非数字) \d 与 \D；</p>
+
+<p>匹配字母和数字 (与非字母和数字) \w 与 \W；</p>
+
+<p>匹配空白字符（与非空白字符）\s 与 \S；</p>
+
+<p>匹配十六进制 前缀用 \x；</p>
+
+<p>匹配八进制 前缀用 \0；</p>
+
+<p>使用POSIX 字符类。</p>
+
+<p>POSIX字符类是许多（但不是所有的）正则表达式实现都支持的一种简写形式。</p>
+
+<p>例如：[:ainum:] 表示任何一个字母或数字（等价于[a-zA-Z0-9]）</p>
+
+<h2 id="重复匹配">重复匹配</h2>
+
+<p>“+” 匹配一个或多个字符</p>
+
+<p>想要匹配同一个字符（或字符集合）的多次重复，只要简单地给这个字符或字符集合加上 “+” 字符作为后缀就可以了。
+“+” 匹配一个或多个字符（至少一个，不匹配零个字符的情况）</p>
+
+<p>“*” 匹配零个或多个字符</p>
+
+<p>和“+”的匹配用法一样。</p>
+
+<p>“?” 匹配零个或一个字符</p>
+
+<p>“?” 只能匹配一个字符（或者字符集合）的零次或一次出现，最多不会超过一次。</p>
+
+<p>匹配的重复次数</p>
+
+<p>重复次数要用 { 和 } 字符来给出，把数值写在它们之间。</p>
+
+<p>为重复匹配次数设定一个精确的值</p>
+
+<p>为重复次数匹配次数设定一个精确的值，把那个数字写在 { 和 } 之间即可。例如 a{3} 意味着模式里的 a 匹配三次。</p>
+
+<h2 id="位置匹配">位置匹配</h2>
+
+<p>正则表达式不仅可以用来匹配任意长度的文本块，还可以用来匹配出现在字符串中特定位置的文本。\b 用来指定一个单词边界（ \B 刚好相反）</p>
+
+<p>“^” 匹配一个字符串的开头，
+&ldquo;$&rdquo; 匹配一个字符串的结尾
+（?m）的记号用来启用分行匹配模式，是一个能够改变其他元字符行为的元字符序列。</p>
+
+<p>“^” 和 “$” 用来指定字符串边界（字符串的开头和字符串的结束）。如果与（？m）配合使用，“^” 和 “$” 还将匹配在一个换行符处开头或结束的字符串（ 此时，换行符将被视为一个字符串分隔符 ）。</p>
+
+<h2 id="使用子表达式">使用子表达式</h2>
+
+<p>子表达式用来定义字符或表达式的集合。</p>
+
+<p>（ 和 ）子表达式是一个更大的表达式的一部分；把一个表达式划分为一系列子表达式的目的是为了把那些子表达式当作一个独立元素来使用。子表达式必须用 （ 和 ） 括起来。</p>
+
+<p>为了提高可读性，可以给表达式的每一个子表达式都加上括号。在语法上完全成立，对表达式的实际行为也没有任何不良影响（对匹配操作的速度可能有点影响）</p>
+
+<p>子表达式的嵌套</p>
+
+<p>子表达式允许嵌套，但这种嵌套的层次在理论上没有限制，但在实际工作中还是应该遵循适可而止的原则。</p>
+
+<p>子表达式的常见用途包括：对重复次数元字符呢作用对象做出精确的设定和控制，对 | 操作符的 OR 条件做出准确的定义等。如有必要，子表达式还允许嵌套使用。</p>
+
+<h2 id="回溯引用">回溯引用</h2>
+
+<p>除了可以用在重复匹配操作中以外，子表达式还可以在模式的内部被引用，这种引用被称为回溯引用。回溯引用的语法在不同的正则表达式实现里有很大的差异。回溯引用在文本匹配和文本替换操作里非常有用。</p>
+
+<p>\1  这是一个回溯引用。</p>
+
+<p>回溯引用指的是模式的后半部分引用在前半部分中定义的子表达式</p>
+
+<p>\1 代表着模式里的第一个子表达式，\2 代表着第2子表达式，以此类推。</p>
+
+<p>回溯引用只能用来引用模式里的子表达式（用（和）括起来的正则表达式片段）</p>
+
+<p>回溯引用在替换操作中的应用。</p>
+
+<p>替换操作需要用到两个正则表达式：一个是用来给出搜索模式，另个用来给出匹配文本的替换模式。回溯引用可以跨模式使用。</p>
+
+<p>在对文本进行重新排版的时候，把文本分解成多个子表达式的做法往往非常有用，这可以让我们对文本的排版效果做出更精确的控制。</p>
+
+<p>大小写转换</p>
+
+<p>有些正则表达式实现允许实现我们使用一些元字符对字母进行大小写转换。</p>
+
+<h2 id="前后查找">前后查找</h2>
+
+<p>向前查找：向前查找指定了一个必须匹配但不在结果中返回的模式。向前查找是一个以（?=）开头的子表达式，需要匹配的文本跟在=后面。
+?= 将向前查找(查找出现在被匹配文本之后的字符，但不消费那个字符)
+任何一个子表达式都可以转换为一个向前查找表达式，只要给它加上一个 ?= 前缀即可。</p>
+
+<p>向后查找：向后查找是查找出现在被匹配文本之前的字符（但不消费它），向后查找操作符是 ?&lt;= ；?&lt;= 与 ?= 的具体使用方法大同小异；它必须用在一个子表达式里。而且后跟要匹配的本文。</p>
+
+<p>把向前查找和向后查找结合起来，也可以对前后查找取非，取非的目的是为了确定将被返回为匹配结果的本文的位置(通过指定匹配结果的前后必须是哪些文本），这种用法被称为正向前查找和正向后查找。术语 “ 正 ” 指的是寻找匹配的事实。</p>
+
+<p>前后查找还有一种不太常见的用法叫作负前后查找，对正前后查找取非。</p>
+
+<h2 id="嵌入条件">嵌入条件</h2>
+
+<p>正则表达式里的条件要用 ？定义，例如：</p>
+
+<p>？匹配前一个字符或表达式，如果它存在的话；</p>
+
+<p>?= 和 ?&lt;= 匹配前面或后面的文本，如果它存在的话；</p>
+
+<p>嵌入条件语法使用 ？ 嵌入条件不外乎以下两种情况：</p>
+
+<p>根据一个回溯引用来进行条件处理，根据一个前后查找来进行条件梳理。</p>
+
+<p>回溯引用条件只在一个前面的子表达式搜索取得成功额情况下允许使用一个表达式。</p>
+
+<p>在正则表达式模式里可以嵌入条件，只有当条件得到（ 或者没有得到 ）满足时，相应的表达式才会被执行。这种条件可以是一个回溯引用（含义是检查该回溯引用是否存在），也可以是一个前后查找操作。</p>
+
+  </section>
+  <footer>
+    
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'Your disqus shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/path/to/avatar" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">xueyuyao</h1>
+        
+        
+        <div class="author-bio">Your short bio</div>
+        
+      </div>
+      
+      <div class="author-contact col-md-4">
+        <a href="#ZgotmplZ">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          &nbsp;Contact me
+        </a>
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://www.xueyuyao.com/2018/05/29/2018-05-29-githubcustomdomain/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://www.xueyuyao.com/2018/06/09/2018-06-09-flappybird/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright notice
+    </div>
+    <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'Your Google Analytics tracking id', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+  <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("Your Mixpanel API key");</script>
+  
+</body>
+</html>
+

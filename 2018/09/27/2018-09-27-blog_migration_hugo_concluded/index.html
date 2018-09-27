@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Hugo concludes &middot;  薛玉瑶的博客" />
+  
+  <meta name="theme-color" content="#hexcolor" />
+ 
+  <meta property="og:site_name" content="薛玉瑶的博客" />
+  <meta property="og:url" content="http://www.xueyuyao.com/2018/09/27/2018-09-27-blog_migration_hugo_concluded/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2018-09-27T14:10:24&#43;08:00" />
+  
+  
+
+  <title>
+     Hugo concludes &middot;  薛玉瑶的博客
+  </title>
+
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
+      
+      <div class="tag-line">
+        每天都是一种练习
+      </div>
+      
+      <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+      
+      <a href="http://www.xueyuyao.com" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+<article>
+  <header>
+    <h1 class="text-primary">Hugo concludes</h1>
+    <div class="post-meta clearfix">
+    
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-09-27T14:10:24&#43;08:00">
+          Sep 27, 2018
+        </time>
+      </div>
+    
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<h1 id="使用-hugo-github-pages-搭建个人博客">使用 hugo+github pages 搭建个人博客</h1>
+
+<p><a href="https://gohugo.io">hugo</a> 是基于 Go 语言的静态网站生成器，前几天将自己的博客迁移到 hugo 上，记录下迁移过程。</p>
+
+<h2 id="搭建环境">搭建环境</h2>
+
+<p>OS：Windows 10</p>
+
+<p>git：<a href="https://git-scm.com/downloads/">安装 Git</a>;</p>
+
+<p>hugo：<a href="https://github.com/gohugoio/hugo/releases">hugo_0.48_Windows-64bit</a>;</p>
+
+<h2 id="安装-hugo">安装 Hugo</h2>
+
+<p>从 Hugo 的 <a href="(https://github.com/gohugoio/hugo/releases)">GitHub 仓库</a>下载安装。当前最新的是 hugo_0.48_Windows-64bit.zip 这个版本。下载解压后添加到 Windows 的系统环境变量的 PATH 中即可，不需安装。</p>
+
+<h2 id="配置-hugo">配置 Hugo</h2>
+
+<h3 id="初始化项目">初始化项目</h3>
+
+<p>使用 hugo new site xxx 来初始化项目，xxx 是自定义文件名。
+以下是我的项目初始化过程</p>
+
+<pre><code>C:\Users\user&gt;hugo new site xueyuyao
+Congratulations! Your new Hugo site is created in C:\Users\user\xueyuyao.
+
+Just a few more steps and you're ready to go:
+
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/, or
+create your own with the &quot;hugo new theme &lt;THEMENAME&gt;&quot; command.
+2. Perhaps you want to add some content. You can add single files
+with &quot;hugo new &lt;SECTIONNAME&gt;\&lt;FILENAME&gt;.&lt;FORMAT&gt;&quot;.
+3. Start the built-in live server via &quot;hugo server&quot;.
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.
+</code></pre>
+
+<p>上面的提示信息是下载主题、添加内容后，之后在本机启动 hugo 自带的服务器调试博客。</p>
+
+<p>命令执行后创建项目目录，其中的目录结构为：</p>
+
+<pre><code>├─archetypes //Hugo 查找原型文件(内容模板)的目录
+├─content    // 放 markdown 文章
+├─data       //目录放数据
+├─layouts    //目录放网站模板文件
+├─static     //目录放图片、css、js 等静态资源
+├─themes     //放置下载的主题
+└─config.toml  //网站的配置文件
+</code></pre>
+
+<h3 id="下载主题">下载主题</h3>
+
+<p><a href="https://themes.gohugo.io/">Hugo 主题网站</a>选择你看中的主题后，点击下载链接从 GitHub 下载到 themes 目录中。也可以使用 git 命令 [git clone] 到 themes 目录下</p>
+
+<pre><code>C:\Users\user&gt;cd xueyuyao/themes
+
+C:\Users\user\xueyuyao\themes&gt;git clone https://github.com/keichi/vienna.git
+Cloning into 'vienna'...
+remote: Enumerating objects: 511, done.
+remote: Total 511 (delta 0), reused 0 (delta 0), pack-reused 511
+Receiving objects: 100% (511/511), 2.37 MiB | 126.00 KiB/s, done.
+Resolving deltas: 100% (285/285), done.
+</code></pre>
+
+<h4 id="检查-themes-目录下是否成功下载主题">检查 themes 目录下是否成功下载主题</h4>
+
+<pre><code>C:\Users\user\xueyuyao\themes&gt;tree
+卷 Windows 的文件夹 PATH 列表
+卷序列号为 3472-27CA
+C:.
+└─vienna
+├─archetypes
+├─images
+├─layouts
+│  ├─partials
+│  └─_default
+└─static
+    ├─css
+    ├─fonts
+    ├─images
+    └─js
+</code></pre>
+
+<h3 id="添加内容">添加内容</h3>
+
+<p>在项目目录中执行 hugo new XX.md 命令，会在 content 目录中创建这个 XX.md 文件</p>
+
+<pre><code>hugo new post/first_blog.md
+</code></pre>
+
+<p>这个文件的默认内容如下：</p>
+
+<pre><code>---
+title: &quot;About&quot;
+date: 2018-09-27T15:32:14+08:00
+draft: true
+---
+</code></pre>
+
+<p>文件默认内容在，draft 表示是否是草稿，编辑完成后请将其改为 false，否则编译会跳过草稿文件。具体的博客内容在下面写：</p>
+
+<pre><code>---
+title: &quot;First_blog&quot;
+date: 2018-09-27T15:45:11+08:00
+draft: true
+---
+
+hello world!
+</code></pre>
+
+<h3 id="本机启动-hugo-自带的服务器">本机启动 hugo 自带的服务器</h3>
+
+<p>在项目根目录下，通过 hugo server 命令可以使用 hugo 内置服务器调试预览博客。&ndash;theme 选项可以指定主题，&ndash;watch 选项可以在修改文件后自动刷新浏览器，&ndash;buildDrafts 包括标记为草稿（draft）的内容</p>
+
+<pre><code>C:\Users\user\xueyuyao&gt;hugo server --theme vienna --watch
+Building sites …
+                   | EN
++------------------+----+
+  Pages            |  7
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     | 14
+  Processed images |  0
+  Aliases          |  1
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Total in 34 ms
+Watching for changes in C:\Users\user\xueyuyao\{content,data,layouts,static,themes}
+Watching for config changes in C:\Users\user\xueyuyao\config.toml
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+</code></pre>
+
+<p>访问 <a href="http://localhost:1313/">http://localhost:1313/</a> 就能看到刚才添加的文章了</p>
+
+<p>如果在 config.toml 中配置了固定的主题，命令可不加 &ndash;theme。</p>
+
+<h3 id="theme-设定">theme 设定</h3>
+
+<p>config.toml</p>
+
+<pre><code>baseURL = &quot;http://www.xueyuyao.com&quot;  这 baseURL 是部署后的访问地址。
+languageCode = &quot;en-us&quot;
+title = &quot;My New Hugo Site&quot;
+theme = &quot;vienna&quot;  // 你使用的theme 名称
+</code></pre>
+
+<p>vienna 文件夹里的 README 文件里包含着该主题的设置说明。</p>
+
+<h2 id="部署到github">部署到GitHub</h2>
+
+<h3 id="创建-github-pages">创建 Github Pages</h3>
+
+<p>通过 <a href="https://pages.github.com/">github pages 使用指南</a>，创建自己的个人博客站点</p>
+
+<h3 id="绑定域名">绑定域名</h3>
+
+<p>把网站托管到 GitHub Pages 上，也可以自定义域名。<a href="https://www.xueyuyao.com/post/2018-05-29-githubcustomdomain/">github 自定义域名</a></p>
+
+<h3 id="开始部署">开始部署</h3>
+
+<p>在 hugo 的项目根目录下，执行以下命令：</p>
+
+<pre><code>C:\Users\user\xueyuyao&gt; hugo --theme=vienna --buildDrafts --baseUrl=&quot;http://www.xueyuyao.com&quot;
+Building sites …
+                   | EN
++------------------+----+
+  Pages            | 11
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     | 14
+  Processed images |  0
+  Aliases          |  1
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Total in 304 ms
+</code></pre>
+
+<p>&ndash;buildDrafts 不加会生成无内容的网站
+&ndash;baseUrl 要和 config.toml 的地址一致。</p>
+
+<p>根目录下创建 public 文件（里面的内容就是你要上传的静态网站的文件。）</p>
+
+<p>把 public 文件里的内容添加到你的 Github 的博客站点上并推送；过几分钟，访问网站地址就可以看到网站内容了。</p>
+
+<h2 id="配置过程中遇到的问题">配置过程中遇到的问题</h2>
+
+<p>1.hugo server、hugo new xx.md 命令 要在创建的项目根目录下才会生效。</p>
+
+<p>2.生成静态网站时，hugo 会忽略所有通过 draft: true 标记为草稿的文件。必须改为 draft: false 才会编译进 HTML 文件。</p>
+
+  </section>
+  <footer>
+    
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'Your disqus shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/path/to/avatar" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">xueyuyao</h1>
+        
+        
+        <div class="author-bio">Your short bio</div>
+        
+      </div>
+      
+      <div class="author-contact col-md-4">
+        <a href="#ZgotmplZ">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          &nbsp;Contact me
+        </a>
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://www.xueyuyao.com/2018/09/20/2018-09-20-class_modifier/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next disabled"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright notice
+    </div>
+    <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'Your Google Analytics tracking id', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+  <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("Your Mixpanel API key");</script>
+  
+</body>
+</html>
+

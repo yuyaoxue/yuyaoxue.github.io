@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Unity Compilation Bug &middot;  薛玉瑶的博客" />
+  
+  <meta name="theme-color" content="#hexcolor" />
+ 
+  <meta property="og:site_name" content="薛玉瑶的博客" />
+  <meta property="og:url" content="http://www.xueyuyao.com/2018/07/08/2018-07-08-unitycompilationbug/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2018-07-08T22:35:26&#43;08:00" />
+  
+  
+
+  <title>
+     Unity Compilation Bug &middot;  薛玉瑶的博客
+  </title>
+
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
+      
+      <div class="tag-line">
+        每天都是一种练习
+      </div>
+      
+      <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+      
+      <a href="http://www.xueyuyao.com" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+<article>
+  <header>
+    <h1 class="text-primary">Unity Compilation Bug</h1>
+    <div class="post-meta clearfix">
+    
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-07-08T22:35:26&#43;08:00">
+          Jul 8, 2018
+        </time>
+      </div>
+    
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<h1 id="前言">前言</h1>
+
+<p>前几天在工作中，遇到一个有关 Unity 编译失效的问题，我修改的脚本保存后，Unity 自动编译后，编译失效。</p>
+
+<h2 id="问题描述">问题描述</h2>
+
+<p>我在 VS 里修改了代码保存之后，回到 Unity 里，Unity 自动编译，编译完成之后，还是我修改代码之前的情况（我修改的文件没有被编译）。</p>
+
+<h2 id="问题复现">问题复现</h2>
+
+<p>比如：我修改并了脚本 A，回到 Unity，Unity 自动编译，在编译期间修改并保存了脚本 B。编译完成之后，脚本 B 修改的部分极有可能没有被编译。</p>
+
+<h2 id="找出原因">找出原因</h2>
+
+<p>1.检查了 Unity 的自动编译开关 Edit-&gt;Unity Preferences-&gt;General-&gt;Auto Refresh; 排查了 Unity 的设置问题
+<img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/AutoRefresh.png?raw=true" alt="auto Refresh" /></p>
+
+<p>2.后来问了同事之后才了解的，这个问题 Unity 标记最后编译时间机制有关系。对于 Unity 而言，VS 只是一个编辑脚本工具，所有的编译工作都在 Unity 这边执行。Unity 不会记每个文件的编译时间，只会记录一个总的最后的编译时间。比如 Unity 编译开始时间为 t1 编译过程需要 10s，最后的编译时间为 t1+10s，如果在这 10s 内又对脚本做了修改，恰好这个脚本已经被编译过了。那这个脚本不会重新被编译，导致了后面的那次修改没有被编译。</p>
+
+<h2 id="解决办法">解决办法</h2>
+
+<p>如果发生了编译失效问题，可以试试以下方法解决：</p>
+
+<p>1.修改并保存编译失效脚本；</p>
+
+<p>2.关闭并重新打开 Unity，重新修改并保存编译失效脚本。</p>
+
+<h2 id="总结与思考">总结与思考</h2>
+
+<p>有两点疑问没有解决：
+1.Unity 最后编译时间存储在什么地方？
+2.各个文件的编译时间存储在什么地方？</p>
+
+<p>后续查 Unity 标记编译时间相关的资料没查到。听同事说这是 Unity 编译的一个 Bug，个人解决不了，只能在做的过程中尽量避免。现在我都会尽量避免在 Unity 执行编译的时候修改脚本。</p>
+
+  </section>
+  <footer>
+    
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'Your disqus shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/path/to/avatar" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">xueyuyao</h1>
+        
+        
+        <div class="author-bio">Your short bio</div>
+        
+      </div>
+      
+      <div class="author-contact col-md-4">
+        <a href="#ZgotmplZ">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          &nbsp;Contact me
+        </a>
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://www.xueyuyao.com/2018/07/01/2018-07-01-firstpublicflappybird/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://www.xueyuyao.com/2018/07/15/2018-07-15-supertextmeshmemoryuninstall/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright notice
+    </div>
+    <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'Your Google Analytics tracking id', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+  <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("Your Mixpanel API key");</script>
+  
+</body>
+</html>
+

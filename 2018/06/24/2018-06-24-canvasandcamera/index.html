@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Unity API 之 Canvas 与 Camera &middot;  薛玉瑶的博客" />
+  
+  <meta name="theme-color" content="#hexcolor" />
+ 
+  <meta property="og:site_name" content="薛玉瑶的博客" />
+  <meta property="og:url" content="http://www.xueyuyao.com/2018/06/24/2018-06-24-canvasandcamera/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2018-06-24T22:35:26&#43;08:00" />
+  
+  
+
+  <title>
+     Unity API 之 Canvas 与 Camera &middot;  薛玉瑶的博客
+  </title>
+
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
+      
+      <div class="tag-line">
+        每天都是一种练习
+      </div>
+      
+      <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+      
+      <a href="http://www.xueyuyao.com" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+<article>
+  <header>
+    <h1 class="text-primary">Unity API 之 Canvas 与 Camera</h1>
+    <div class="post-meta clearfix">
+    
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-06-24T22:35:26&#43;08:00">
+          Jun 24, 2018
+        </time>
+      </div>
+    
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<h1 id="前言">前言</h1>
+
+<p>最近在做一个 2D 游戏，项目做的差不多了，整理一下自己在制作过程中用到的知识点，这篇写 Canvas 与 Camera 的使用。</p>
+
+<h2 id="canvas">Canvas</h2>
+
+<p>画布是所有 UI 元素都应该在其中的区域。Canvas 是一个带有画布组件的游戏对象，所有 UI 元素都必须是此类画布的子元素。下面是 Canvas 组件</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/canvas.png?raw=true" alt="Canvas" /></p>
+
+<p>Canvas 有以下三种渲染模式：</p>
+
+<p>1.Screen Space Camera</p>
+
+<p>此模式画布被放置在指定的摄像机前的距离。UI 元素由这个摄像头呈现，这意味着摄像头的设置会影响 UI 的外观。如果将相机设置为透视，UI 元素将以透视的方式呈现，视角的失真程度可以通过相机的视角来控制。如果屏幕被调整了大小，改变了分辨率，或者相机的截屏改变了，画布也会自动地改变大小以匹配。</p>
+
+<p>tip：如果想在 UI 上显示特效，可以使用此渲染模式</p>
+
+<p>2.Screen Space Overlay</p>
+
+<p>此模式将 UI 元素放置在场景顶部呈现的屏幕上。如果屏幕被调整大小或改变分辨率，画布将自动改变大小以匹配它。</p>
+
+<p>tip：如果想在 UI 上显示特效 ，此模式不适用。</p>
+
+<p>3.World Space</p>
+
+<p>在此模式中，画布将表现为场景中的任何其他对象。画布的大小可以通过它的 Rect 变换来手动设置，UI 元素会基于 3D 布局呈现在场景中的其他对象的前面或后面。这对于注定要成为世界一部分的 UI 是有用的。</p>
+
+<p>UI 适配</p>
+
+<p>Canvas Scaler</p>
+
+<p>对于设置为“Screen Space - Overlay” or “Screen Space - Camera”的画布，可以将画布比例器 UI 比例模式设置为 Constant Pixel Size, Scale With Screen Size, or Constant Physical Size。</p>
+
+<p>Constant Pixel Size</p>
+
+<p>UI 元素的位置和大小以屏幕上的像素为单位指定。这也是画布的默认功能，当不附带画布标量时。但是，在画布标量中设置了比例因子设置之后，可以将常量扩展应用到画布中的所有 UI 元素。</p>
+
+<p>Scale With Screen Size</p>
+
+<p>可以根据指定参考分辨率的像素指定位置和大小。如果当前的屏幕分辨率大于参考分辨率，画布将只保留参考分辨率的分辨率，但将按比例放大以适应屏幕。如果当前屏幕分辨率小于参考分辨率，那么画布也会相应地缩小以适应。</p>
+
+<p>如果当前屏幕分辨率与参考分辨率有不同的长宽比，分别缩放每个轴以适应屏幕将导致非均匀缩放，这通常是不可取的。相反，ReferenceResolution 组件将使画布分辨率偏离参考分辨率，以尊重屏幕的纵横比。可以使用屏幕匹配模式设置来控制这种偏差的行为。</p>
+
+<p>UI 适配 可以设置此缩放模式</p>
+
+<p>Constant Physical Size</p>
+
+<p>UI 元素的位置和大小在物理单元(如毫米、点或 picas )中指定。此模式依赖于正确报告屏幕DPI 的设备。您可以指定一个 fallback DPI 用于不报告 DPI 的设备</p>
+
+<h2 id="camera">Camera</h2>
+
+<p>相机是用来捕捉和显示世界给玩家的设备。通过定制和操作摄像头，你可以使你的游戏呈现真正独特。你可以在一个场景中拥有无限数量的相机。它们可以被设置成任何顺序，在屏幕上的任何位置，或只有屏幕的某些部分，下面是 Camera 组件。</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/_v_images/camera.png?raw=true" alt="Camera" /></p>
+
+<p>上面的 Canvas 里面有提到当 Canvas 的渲染模式选择为 Screen Space Camera 时，它所引用的 Camera 的投影设置会影响到 Canvas 里 UI 元素的显示。</p>
+
+<p>Projection 包括 Perspective，Orthographic 两个投射方式</p>
+
+<p>Perspective：透视</p>
+
+<p>摄像机将用透视的方式来渲染游戏对象。</p>
+
+<p>如果设置为 Perspective，还需要设置一个参数 Field of view (视野范围，用于控制摄像机的视角宽度以及纵向的角度尺寸。</p>
+
+<p>Orthographic：正交</p>
+
+<p>摄像机将用无透视的方式来渲染游戏对象。
+注意：在 Orthographic 模式下不支持延迟渲染。总是使用前向渲染。</p>
+
+<p>把相机标记为 Orthographic 会从相机的视图中移除所有的视角。这对于制作等距或 2D 游戏非常有用。</p>
+
+<p>如果设置为 Orthographic，还需要设置一个参数 Size（用于控制正交模式摄像机的视口大小）。</p>
+
+<p>这个大小的设置会根据 UI 素材的尺寸大小以及设置的 Pixels Per Unit 值有关系，一般默认为 100。也就是 288x512 的图片在 Unity 里大小是 2.88x5.12。如果想让这个图片显示全屏，Size 设置为 2.56。</p>
+
+<p>以下是 Unity 官方文档传送门：</p>
+
+<p><a href="https://docs.unity3d.com/Manual/class-Camera.html">Camera</a></p>
+
+<p><a href="https://docs.unity3d.com/Manual/UICanvas.html">Canvas</a></p>
+
+<p><a href="https://docs.unity3d.com/Manual/script-CanvasScaler.html">Canvas Scaler</a></p>
+
+  </section>
+  <footer>
+    
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'Your disqus shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/path/to/avatar" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">xueyuyao</h1>
+        
+        
+        <div class="author-bio">Your short bio</div>
+        
+      </div>
+      
+      <div class="author-contact col-md-4">
+        <a href="#ZgotmplZ">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          &nbsp;Contact me
+        </a>
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://www.xueyuyao.com/2018/06/19/2018-06-19-spriteandimage/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://www.xueyuyao.com/2018/07/01/2018-07-01-firstpublicflappybird/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright notice
+    </div>
+    <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'Your Google Analytics tracking id', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+  <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("Your Mixpanel API key");</script>
+  
+</body>
+</html>
+
