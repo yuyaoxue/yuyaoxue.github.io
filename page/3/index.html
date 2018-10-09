@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#hexcolor" />
  
   <meta property="og:site_name" content="薛玉瑶的博客" />
-  <meta property="og:url" content="https://www.xueyuyao.com/" />
+  <meta property="og:url" content="http://www.xueyuyao.com/" />
   
   
   <meta property="og:type" content="website" />
@@ -18,21 +18,21 @@
      薛玉瑶的博客
   </title>
 
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/main.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/github.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
-  <link rel="shortcut icon" href="https://www.xueyuyao.com/images/favicon.ico" />
-  <link rel="apple-touch-icon" href="https://www.xueyuyao.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
   
-  <link href="https://www.xueyuyao.com/index.xml" rel="alternate" type="application/rss+xml" title="薛玉瑶的博客" />
+  <link href="http://www.xueyuyao.com/index.xml" rel="alternate" type="application/rss+xml" title="薛玉瑶的博客" />
   
 </head>
 <body>
     <header class="global-header"  style="background-image:url( /images/bg.jpg )">
     <section class="header-text">
-      <h1><a href="https://www.xueyuyao.com/">薛玉瑶的博客</a></h1>
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
       
       <div class="tag-line">
         每天都是一种练习
@@ -67,7 +67,7 @@
 
       
       
-      <a href="https://www.xueyuyao.com/index.xml" class="btn-header btn-subscribe hidden-xs">
+      <a href="http://www.xueyuyao.com/index.xml" class="btn-header btn-subscribe hidden-xs">
         <i class="fa fa-rss" aria-hidden="true"></i>
         &nbsp;Subscribe
       </a>
@@ -81,7 +81,50 @@
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/05/23/2018-05-23-learnroads/">学习之路</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-supertextmesh/">图文混排总结</a></h2>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-05-23T22:35:26&#43;08:00">
+          May 23, 2018
+        </time>
+      </div>
+    </div>
+  </header>
+  <div>
+    图文混排总结 最近在做图文混排相关的功能，先后使用了几种方式实现；有的本身有问题，有的不适用与我们的项目， 总结一下以后略过这些坑。
+TextWithImage Text 中加载个 Image 是没有问题，加载1个以上，就会报错(错误位置是 TextWithImage 里 99 行)，将多余的 Image 的 enable 设置为 false，不能进行设置，删除等操作，还会出现加载一个 Image 创建出 2 个， 加载 2 个，创建出 3 个&hellip;翻倍的创建 Image，消耗性能。
+TextInlineSprite 实现原理：（text中插入图片） 1：总体显示方面都还可以 (可以设置 Image 显示大小，支持动态图）
+2：显示 Bug（表情会出现丢失的情况，关掉界面再打开就会显示）
+3: 需要手动清理画布上的表情 list 显示(如果是分页显示的话，切换表情时，需要把前一个 Image 内同清理掉)
+4:最严重的问题时分辨率适配问题(不同比例的分辨率，表情位置会出现偏差，目前没有找到合适的办法解决)， 在网上看的是， 写插件的作者之前设计的时候，没有把适配考虑进去，
+5:性能未测试
+参考链接：TextInlineSprite
+EmojiText 实现原理：（文字和图片独立渲染） 这个方案目前想到有两个弊端：
+1：Outline、Shadow 使用时，图片也被处理的问题
+2：图片是根据文字大小来渲染的，跟文字大小一样，显示看起来表情没有很突出
+参考链接：EmojiText (文字和图片独立渲染)
+上面的这些情况是我在项目中遇到的实际问题，以下链接中有详细的
+UGUI 图文混排解决方案和优化
+Super Text Mesh SuperTextMesh 是个功能很强大的插件，可以实现渲染动态文字，富文本支持图文混排。具体的功能类型有：文字效果、TextColor、Automatic、Master、Inline；（图文混排就是 Inline 的一种实现方式：Quads）还有一个比较好的是，SuperTextMesh 是开源的，根据项目的需求可以修改源代码。
+unityAssetStore 下载链接 Super Text Mesh
+  </div>
+  
+  <footer>
+    <ul class="pager">
+      <li class="next"><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-supertextmesh/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+  </footer>
+  
+</article>
+
+  
+  
+  <hr/>
+  
+  <article>
+  <header>
+    <h2><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-learnroads/">学习之路</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -123,7 +166,7 @@
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/05/23/2018-05-23-learningplan/">学习计划</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-learningplan/">学习计划</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -154,7 +197,7 @@ Java 语言也是接 SDK 的时候，有所接触；
   
   <footer>
     <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/05/23/2018-05-23-learningplan/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+      <li class="next"><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-learningplan/">Read more <span aria-hidden="true">&raquo;</span></a></li>
     </ul>
   </footer>
   
@@ -166,7 +209,7 @@ Java 语言也是接 SDK 的时候，有所接触；
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/05/23/2018-05-23-debuging_first/">调试的重要性</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/05/23/2018-05-23-debuging_first/">调试的重要性</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -237,7 +280,7 @@ Java 语言也是接 SDK 的时候，有所接触；
 
   </footer>
 
-  <script src="https://www.xueyuyao.com/js/highlight.pack.js"></script>
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
   </script>

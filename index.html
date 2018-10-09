@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#hexcolor" />
  
   <meta property="og:site_name" content="薛玉瑶的博客" />
-  <meta property="og:url" content="https://www.xueyuyao.com/" />
+  <meta property="og:url" content="http://www.xueyuyao.com/" />
   
   
   <meta property="og:type" content="website" />
@@ -18,21 +18,21 @@
      薛玉瑶的博客
   </title>
 
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/main.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://www.xueyuyao.com/css/github.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/main.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://www.xueyuyao.comcss/github.css" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
-  <link rel="shortcut icon" href="https://www.xueyuyao.com/images/favicon.ico" />
-  <link rel="apple-touch-icon" href="https://www.xueyuyao.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://www.xueyuyao.comimages/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://www.xueyuyao.comimages/apple-touch-icon.png" />
   
-  <link href="https://www.xueyuyao.com/index.xml" rel="alternate" type="application/rss+xml" title="薛玉瑶的博客" />
+  <link href="http://www.xueyuyao.com/index.xml" rel="alternate" type="application/rss+xml" title="薛玉瑶的博客" />
   
 </head>
 <body>
     <header class="global-header"  style="background-image:url( /images/bg.jpg )">
     <section class="header-text">
-      <h1><a href="https://www.xueyuyao.com/">薛玉瑶的博客</a></h1>
+      <h1><a href="http://www.xueyuyao.com">薛玉瑶的博客</a></h1>
       
       <div class="tag-line">
         每天都是一种练习
@@ -67,7 +67,7 @@
 
       
       
-      <a href="https://www.xueyuyao.com/index.xml" class="btn-header btn-subscribe hidden-xs">
+      <a href="http://www.xueyuyao.com/index.xml" class="btn-header btn-subscribe hidden-xs">
         <i class="fa fa-rss" aria-hidden="true"></i>
         &nbsp;Subscribe
       </a>
@@ -81,7 +81,49 @@
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/09/27/2018-09-27-unity-2017-game-optimization/">Unity 2017 Game Optimization 脑图</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/10/08/2018-10-08-valuetypeandreferencetype/">C# 基础随笔之值类型与引用类型</a></h2>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-10-08T08:24:52&#43;08:00">
+          Oct 8, 2018
+        </time>
+      </div>
+    </div>
+  </header>
+  <div>
+    前言 最近在温习 C# 语言基础，于是就整理了值类型和引用类型的随笔。
+值类型 值类型的变量直接包含值，变量引用的位置就是值在内存中实际存储的位置。因此，将一个原始变量的值赋给另一个变量，会在新变量的位置创建原始变量的值的一个内存副本，改变一个值类型变量的值不会影响其他任何值类型的值，因为变量各有各有的存储位置。值类型的变量分配在托管栈上。
+值类型包括：数值类型、结构体（struct）、bool 型、自定义结构体、枚举（enum）
+引用类型 引用类型的值存储的是对数据存储位置的引用，而不是直接存储数据。要去那个位置才能找到真正的数据。引用类型指向的内存区域称为堆。将引用类型的变量赋给另一个引用类型的变量，只会复制引用而不需要复制所引用的数据，所以两个不同的变量可引用相同的数据。
+引用类型包括：数组、自定义的类、接口（interface）、委托（delegate）、object、字符串、null 类型、类（class）。
+值类型与引用类型的区别 值类型和引用类型的区别源于复制策略的不同，每种类型在内存中以不同的方式存储。
+存储方式：值类型直接存储数据本身；引用类型存储的是数据的引用，数据存储在数据堆中。
+内存分配：值类型分配在栈（stack）上；引用类型分配在堆（heap）上
+内存回收：值类型使用完之后立即回收；引用类型使用完之后不立即回收，而是交给 GC 处理回收。
+赋值操作：值类型会复制一个数据的内存副本；引用类型会复制引用。
+效率：值类型效率高，不需要地址转换；引用类型效率低，不需要进行地址转换。
+参数传递 参数传递包括值传递和引用传递。值传递是传递原始数据的拷贝；给参数加了ref（out）后，参数是引用传递，这时候传递的是引用地址。
+装箱与拆箱 《C#6.0 的本质论》中有装箱与拆箱的介绍：
+装箱是一个值类型转换为引用类型的过程。转换的结果必然是对一个存储位置的引用。该变量表面上包含引用类型的实例，但实际上包含值类型的值， 从值类型的变量（直接引用其数据）转换成引用类型（引用堆上的一个位置）时，会涉及以下几个步骤： 1：在堆上分配内存。它将用于存放值类型的数据以及少许额外开销（SyncBlockIndex 和方法表指针），这些额外开销使对象看起来像引用类型的托管对象实例。 2：接着发生一次内存复制，当前存储位置的值类型数据被复制到堆上分配好的位置。 3：转换结果是对堆上的心存储位置的引用。 相反的过程称为拆箱。拆箱转换先检查已装箱的值的类型兼容于要拆箱成的值的类型，然后复制堆中存储的值。 装箱和拆箱之所以重要，是因为装箱会影响性能和行为。每个装箱操作都涉及内存分配和复制，每个拆箱操作都涉及类型检查和复制。 如果装箱和拆箱进行得不是很频繁，它们实现的性能问题不大。但有时候，装箱很容易被忽视，而且会非常频繁地发生，这就可能大幅度影响性能。  内存分配 在 《Unity 2017 Game Optimization - Second Edition》中有对值类型和引用类型内存分配的介绍：
+Not all memory allocations we make within Mono will go through the heap. The .NET Framework (and, by extension, the C# language, which merely implements the .
+  </div>
+  
+  <footer>
+    <ul class="pager">
+      <li class="next"><a href="http://www.xueyuyao.com/2018/10/08/2018-10-08-valuetypeandreferencetype/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+  </footer>
+  
+</article>
+
+  
+  
+  <hr/>
+  
+  <article>
+  <header>
+    <h2><a href="http://www.xueyuyao.com/2018/09/27/2018-09-27-unity-2017-game-optimization/">Unity 2017 Game Optimization 脑图</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -104,7 +146,7 @@
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/09/27/2018-09-27-hugo_buildblog_summarize/">使用 hugo&#43;github pages 搭建个人博客</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/09/27/2018-09-27-hugo_buildblog_summarize/">使用 hugo&#43;github pages 搭建个人博客</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -126,7 +168,7 @@ C:\Users\user&gt;hugo new site xueyuyao Congratulations! Your new Hugo site is c
   
   <footer>
     <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/09/27/2018-09-27-hugo_buildblog_summarize/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+      <li class="next"><a href="http://www.xueyuyao.com/2018/09/27/2018-09-27-hugo_buildblog_summarize/">Read more <span aria-hidden="true">&raquo;</span></a></li>
     </ul>
   </footer>
   
@@ -138,7 +180,7 @@ C:\Users\user&gt;hugo new site xueyuyao Congratulations! Your new Hugo site is c
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/09/20/2018-09-20-class_modifier/">C# 中的访问修饰符和声明修饰符</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/09/20/2018-09-20-class_modifier/">C# 基础随笔之访问修饰符和声明修饰符</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -176,7 +218,7 @@ Extern 用于声明在外部实现的方法。 extern 修饰符的常见用法�
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/09/09/2018-09-09-coroutine/">浅谈协程</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/09/09/2018-09-09-coroutine/">浅谈协程</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -197,7 +239,7 @@ public class Test : MonoBehaviour { void Start () { Debug.
   
   <footer>
     <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/09/09/2018-09-09-coroutine/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+      <li class="next"><a href="http://www.xueyuyao.com/2018/09/09/2018-09-09-coroutine/">Read more <span aria-hidden="true">&raquo;</span></a></li>
     </ul>
   </footer>
   
@@ -209,7 +251,7 @@ public class Test : MonoBehaviour { void Start () { Debug.
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/08/12/2018-08-12-selfreflectionatwork/">工作自我反省</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/08/12/2018-08-12-selfreflectionatwork/">工作自我反省</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -239,7 +281,7 @@ ps：（项目规定 merge 操作是单方向的，即：在 master 分支 merge
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/08/05/2018-08-05-aboutprefab/">有关于 .prefab 与自身挂载组件的关系</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/08/05/2018-08-05-aboutprefab/">有关于 .prefab 与自身挂载组件的关系</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -259,7 +301,7 @@ Canvas 的 Render Mode 设置不同，对于 RectTransform 组件上的值是有
   
   <footer>
     <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/08/05/2018-08-05-aboutprefab/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+      <li class="next"><a href="http://www.xueyuyao.com/2018/08/05/2018-08-05-aboutprefab/">Read more <span aria-hidden="true">&raquo;</span></a></li>
     </ul>
   </footer>
   
@@ -271,7 +313,7 @@ Canvas 的 Render Mode 设置不同，对于 RectTransform 组件上的值是有
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/07/30/2018-07-30-how-to-ask-questions-the-smart-way-note/">提问的智慧-阅读笔记</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/07/30/2018-07-30-how-to-ask-questions-the-smart-way-note/">提问的智慧-阅读笔记</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -303,7 +345,7 @@ Canvas 的 Render Mode 设置不同，对于 RectTransform 组件上的值是有
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/07/29/2018-07-29-incorrect_use_of_gitrebase/">有关 git rebase 错误使用引发的问题</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/07/29/2018-07-29-incorrect_use_of_gitrebase/">有关 git rebase 错误使用引发的问题</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -327,7 +369,7 @@ rebase 会将合并提交变为普通提交，丢失父节点信息。  使用 �
   
   <footer>
     <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/07/29/2018-07-29-incorrect_use_of_gitrebase/">Read more <span aria-hidden="true">&raquo;</span></a></li>
+      <li class="next"><a href="http://www.xueyuyao.com/2018/07/29/2018-07-29-incorrect_use_of_gitrebase/">Read more <span aria-hidden="true">&raquo;</span></a></li>
     </ul>
   </footer>
   
@@ -339,7 +381,7 @@ rebase 会将合并提交变为普通提交，丢失父节点信息。  使用 �
   
   <article>
   <header>
-    <h2><a href="https://www.xueyuyao.com/2018/07/25/2018-07-25-game_programmingnote/">《游戏编程算法与技巧》读书笔记一</a></h2>
+    <h2><a href="http://www.xueyuyao.com/2018/07/25/2018-07-25-game_programmingnote/">《游戏编程算法与技巧》读书笔记一</a></h2>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
@@ -353,47 +395,6 @@ rebase 会将合并提交变为普通提交，丢失父节点信息。  使用 �
     前言 前段时间阅读了一本有关游戏编程的书《游戏编程算法与技巧》，书中介绍了大量今天在游戏行业中用到的算法与技术。包括 2D 和 3D 图形学、物理、人工智能、摄像机等多个方面的技术。
 知识框架图 这本书的读书笔记，我打算分成几部分，第一次我按着书上的不同的章节，简单的画了一个框架图，看着比较直观，细节上的内容在后续的博客里加上。
   </div>
-  
-</article>
-
-  
-  
-  <hr/>
-  
-  <article>
-  <header>
-    <h2><a href="https://www.xueyuyao.com/2018/07/15/2018-07-15-supertextmesh_memory_uninstall/">SuperTextMesh MemoryUninstall Bug</a></h2>
-    <div class="post-meta clearfix">
-      <div class="post-date pull-left">
-        Posted on
-        <time datetime="2018-07-15T22:35:26&#43;08:00">
-          Jul 15, 2018
-        </time>
-      </div>
-    </div>
-  </header>
-  <div>
-    前言 前一段时间将 SuperTextMesh 导入到项目中，实现图文混排。最近使用 SuperTextMesh 来实现炫酷的文字特效。在使用过程中，发现了 SuperTextMesh 内存卸载的 Bug。从查找问题到解决断断续续花了有一周的时间，现在问题解决了，写一个总结记录下。
-问题描述 项目中，在游戏界面上有使用 SuperTextMesh 来实现文字特效，在网络断开的时候文字会突然消失。经过调试，发现了网络断开的时候，代码在调用了 Resources.UnloadUnusedAssets() ，之后 SuperTextMesh 的文字就消失了。测试将那行代码注释掉，文字就不消失了。于是就沿着这个方向开始查找。
-问题复现 为了验证 Bug 确实是资源卸载引起的，重新创建了一个全新的项目，将插件导入空项目中。
-运行环境 SuperTextMesh：1.7.1
-OS：Windows 10，64 位操作系统，基于 x64 的处理器
-Unity：Unity 2017.4.2f2 (64-bit)
-Visual Studio：2017
-复现操作 在场景中，创建 SuperTextMesh，Button；给 Button 添加点击事件，事件里调用 Resources.UnloadUnusedAssets()。开始运行，文字显示；点击按钮 Button， 文字消失。
-找出原因 猜想一 当时还未锁定是资源卸载的问题的时候，排查方向是文字的参数发生了变化。
-之前美术同事在做特效的时候，也出现过类似的问题，也会消失；然后选中该特效又能显示出来。后来找出的问题是：在过程中，有父集的 Scale 为 0 导致没有显示。所不同的是，我的一开始是显示的，只是后面消失了。
-我根据同事的解决办法去检测下，SuperTextMesh 消失后他的 Scale 的情况，一并检测了其他会影响消失的参数，都没有找到问题所在，所以排除这个猜想。
-之后的猜想都是关于资源卸载后，将使用中的 Text 里面的资源卸载掉的原因。
-猜想二 Resources.UnloadUnusedAssets()；会卸载掉不被引用的 assets，查代码找到 SuperTextmMeshData 的一个引用是通过 Resources.Load() 加载资源赋值的，后来看到 data 是一个私有静态成员变量，Resources.UnloadUnusedAssets() 不可能会卸载掉他（静态成员变量的引用一直会在）。
-猜想三 问题出现的时候，在 FrameDebug 中 UGUI.
-  </div>
-  
-  <footer>
-    <ul class="pager">
-      <li class="next"><a href="https://www.xueyuyao.com/2018/07/15/2018-07-15-supertextmesh_memory_uninstall/">Read more <span aria-hidden="true">&raquo;</span></a></li>
-    </ul>
-  </footer>
   
 </article>
 
@@ -444,7 +445,7 @@ Visual Studio：2017
 
   </footer>
 
-  <script src="https://www.xueyuyao.com/js/highlight.pack.js"></script>
+  <script src="http://www.xueyuyao.comjs/highlight.pack.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
   </script>
