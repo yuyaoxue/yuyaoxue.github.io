@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" C# 基础随笔之 Socket 基础知识一 &middot;  薛玉瑶的博客" />
+  
+  <meta name="theme-color" content="#hexcolor" />
+ 
+  <meta property="og:site_name" content="薛玉瑶的博客" />
+  <meta property="og:url" content="https://www.xueyuyao.com/2018/10/15/2018-10-15-socket_one/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2018-10-15T17:34:55&#43;08:00" />
+  
+  
+
+  <title>
+     C# 基础随笔之 Socket 基础知识一 &middot;  薛玉瑶的博客
+  </title>
+
+  <link rel="stylesheet" href="https://www.xueyuyao.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.xueyuyao.com/css/main.css" />
+  <link rel="stylesheet" href="https://www.xueyuyao.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.xueyuyao.com/css/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="https://www.xueyuyao.com/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.xueyuyao.com/images/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="https://www.xueyuyao.com/">薛玉瑶的博客</a></h1>
+      
+      <div class="tag-line">
+        每天都是一种练习
+      </div>
+      
+      <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+      
+      <a href="https://www.xueyuyao.com/" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+<article>
+  <header>
+    <h1 class="text-primary">C# 基础随笔之 Socket 基础知识一</h1>
+    <div class="post-meta clearfix">
+    
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2018-10-15T17:34:55&#43;08:00">
+          Oct 15, 2018
+        </time>
+      </div>
+    
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<h1 id="前言">前言</h1>
+
+<p>之前对于 Socket 的原理不深了解，最近想深入学习 Socket 网络编程。本文重要内容是梳理下 Socket 的基础知识。</p>
+
+<p>ps：本文以下内容是我之前在网络上看到的，觉得不错的内容，复制收藏的，原文链接都已丢失。</p>
+
+<h2 id="概念">概念</h2>
+
+<p>套接字（Socket）是通信的基石，是支持 TCP/IP 协议的网络通信的基本操作单元。它是网络通信过程中端点的抽象表示。</p>
+
+<p>包含进行网络通信必须的五种信息：连接使用的协议，本地主机的 IP 地址，本地进程的协议端口，远地主机的 IP 地址，远地进程的协议端口。</p>
+
+<p>应用层通过传输层进行数据通信时，TCP 会遇到同时为多个应用程序进程提供并发服务的问题。多个 TCP 连接或多个应用程序进程可能需要通过同一个 TCP 协议端口传输数据。为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与 TCP/IP 协议交互提供了套接字  (Socket) 接口。应用层可以和传输层通过 Socket 接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/socket/socket3.jpg?raw=true" alt="socket" /></p>
+
+<p>网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端称为一个 Socket。</p>
+
+<p>建立网络通信连接至少要一对端口号（Socket），Socket 本质上是编程接口（API），对 TCP/IP 的封装，TCP/IP 也要提供可供程序员做网络开发所用的接口，这就是 Socket 编程接口。</p>
+
+<p>以 C# 语言为例：</p>
+
+<p>System.Net.Sockets 是提供的 Socket 的 API 只要在脚本中引入，就可以
+Socket 相关的接口了。</p>
+
+<h2 id="建立-socket-连接">建立 Socket 连接</h2>
+
+<p>建立 Socket 连接至少需要一对套接字，其中一个运行于客户端，称为 ClientSocket，另一个运行于服务器端，称为 ServerSocket。</p>
+
+<p>套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
+
+<p>服务器监听：服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
+
+<p>客户端请求：指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
+
+<p>连接确认：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发 给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/socket/socket1.jpg?raw=true" alt="连接过程" /></p>
+
+<h2 id="tcp-ip-udp">TCP/IP、UDP</h2>
+
+<p>前面的内容中提到了 TCP/IP、UDP，那么什么是 TCP/IP、UDP？</p>
+
+<h3 id="tcp-ip">TCP/IP</h3>
+
+<p>TCP/IP（Transmission Control Protocol/Internet Protocol）即传输控制协议/网间协议，是一个工业标准的协议集，它是为广域网（WANS）设计的。</p>
+
+<p>TCP 是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接:</p>
+
+<h3 id="三次握手">三次握手</h3>
+
+<p>第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；</p>
+
+<p>第二次握手：服务器收到 syn 包，必须确认客户的 SYN（ack=j+1），同时自己也发送一个 SYN  包（syn=k），即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态；</p>
+
+<p>第三次握手：客户端收到服务器的 SYN＋ACK 包，向服务器发送确认包 ACK（ack=k+1），此包发送完毕，客户端和服务器进入 ESTABLISHED 状态，完成三次握手。完成三次握手，客户端与服务器开始传送数据。</p>
+
+<p><img src="https://github.com/yuyaoxue/yuyaoxue.github.io/blob/master/assets/socket/socket5.png?raw=true" alt="三次握手" /></p>
+
+<p>上文中 提到的 SYN 是 位码。位码即 TCP 标志位，有 6 种标示：</p>
+
+<p>SYN（synchronous建立联机）；</p>
+
+<p>ACK（acknowledgement 确认）；</p>
+
+<p>PSH（push传送）；</p>
+
+<p>FIN（finish结束）；</p>
+
+<p>RST（reset重置）；</p>
+
+<p>URG（urgent紧急）；</p>
+
+<p>Sequence number（顺序号码）；</p>
+
+<p>Acknowledge number（确认号码）；</p>
+
+<h3 id="udp">UDP</h3>
+
+<p>UDP（User Data Protocol，用户数据报协议）是与 TCP 相对应的协议。它是属于 TCP/IP 协议族中的一种。
+本文是梳理了一下 Socket 大概的基础内容，没有深入的介绍。下一篇文章会做一个 Socket 连接的实例，在实例中学习更多的内容。</p>
+
+  </section>
+  <footer>
+    
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'Your disqus shortname';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/path/to/avatar" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">xueyuyao</h1>
+        
+        
+        <div class="author-bio">Your short bio</div>
+        
+      </div>
+      
+      <div class="author-contact col-md-4">
+        <a href="#ZgotmplZ">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          &nbsp;Contact me
+        </a>
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="https://www.xueyuyao.com/2018/10/08/2018-10-08-valuetypeandreferencetype/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next disabled"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright notice
+    </div>
+    <div class="sns-links hidden-print">
+  
+  <a href="#ZgotmplZ">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://plus.google.com/+yuyaoxue0617" target="_blank">
+    <i class="fa fa-google"></i>
+  </a>
+  
+  
+  
+  <a href="https://github.com/yuyaoxue" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <script src="https://www.xueyuyao.com/js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'Your Google Analytics tracking id', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+  <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("Your Mixpanel API key");</script>
+  
+</body>
+</html>
+
