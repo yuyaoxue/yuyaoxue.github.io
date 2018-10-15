@@ -122,8 +122,7 @@
 
 <p>以 C# 语言为例：</p>
 
-<p>System.Net.Sockets 是提供的 Socket 的 API 只要在脚本中引入，就可以
-Socket 相关的接口了。</p>
+<p>System.Net.Sockets 是提供的 Socket 的 API， 只要在脚本中引入，就可以调用 Socket 相关的接口了。</p>
 
 <h2 id="建立-socket-连接">建立 Socket 连接</h2>
 
@@ -151,9 +150,9 @@ Socket 相关的接口了。</p>
 
 <h3 id="三次握手">三次握手</h3>
 
-<p>第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；</p>
+<p>第一次握手：建立连接时，客户端发送 syn 包（syn=j）到服务器，并进入 SYN_SEND 状态，等待服务器确认；</p>
 
-<p>第二次握手：服务器收到 syn 包，必须确认客户的 SYN（ack=j+1），同时自己也发送一个 SYN  包（syn=k），即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态；</p>
+<p>第二次握手：服务器收到 syn 包，必须确认客户端的 SYN（ack=j+1），同时自己也发送一个 SYN  包（syn=k），即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态；</p>
 
 <p>第三次握手：客户端收到服务器的 SYN＋ACK 包，向服务器发送确认包 ACK（ack=k+1），此包发送完毕，客户端和服务器进入 ESTABLISHED 状态，完成三次握手。完成三次握手，客户端与服务器开始传送数据。</p>
 
@@ -161,17 +160,17 @@ Socket 相关的接口了。</p>
 
 <p>上文中 提到的 SYN 是 位码。位码即 TCP 标志位，有 6 种标示：</p>
 
-<p>SYN（synchronous建立联机）；</p>
+<p>SYN（synchronous 建立联机）；</p>
 
 <p>ACK（acknowledgement 确认）；</p>
 
-<p>PSH（push传送）；</p>
+<p>PSH（push 传送）；</p>
 
-<p>FIN（finish结束）；</p>
+<p>FIN（finish 结束）；</p>
 
-<p>RST（reset重置）；</p>
+<p>RST（reset 重置）；</p>
 
-<p>URG（urgent紧急）；</p>
+<p>URG（urgent 紧急）；</p>
 
 <p>Sequence number（顺序号码）；</p>
 
@@ -179,8 +178,11 @@ Socket 相关的接口了。</p>
 
 <h3 id="udp">UDP</h3>
 
-<p>UDP（User Data Protocol，用户数据报协议）是与 TCP 相对应的协议。它是属于 TCP/IP 协议族中的一种。
-本文是梳理了一下 Socket 大概的基础内容，没有深入的介绍。下一篇文章会做一个 Socket 连接的实例，在实例中学习更多的内容。</p>
+<p>UDP（User Data Protocol，用户数据报协议）是与 TCP 相对应的协议。它是属于 TCP/IP 协议族中的一种。</p>
+
+<h2 id="结语">结语</h2>
+
+<p>本文是梳理了一下 Socket 大概的基础内容，没有深入的介绍。下一篇文章会做一个 Socket 连接的实例，在实例中学习更多的内容。</p>
 
   </section>
   <footer>
